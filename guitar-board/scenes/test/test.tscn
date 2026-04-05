@@ -3,11 +3,37 @@
 [ext_resource type="Script" uid="uid://ch6mhsl4nbe4e" path="res://scenes/test/test.gd" id="1_da6vm"]
 [ext_resource type="PackedScene" uid="uid://bg6bi64miavng" path="res://entities/player/player.tscn" id="2_st4qh"]
 
+[sub_resource type="Curve2D" id="Curve2D_st4qh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -913, -781, 0, 0, 0, 0, 208, -794, 0, 0, 0, 0, 889, -777, 0, 0, 0, 0, 1578, -799, 0, 0, 0, 0, 2365, -817, 0, 0, 0, 0, 2361, 220, 0, 0, 0, 0, 2356, 407, 0, 0, 0, 0, 2370, 1069, 0, 0, 0, 0, -304, 1109, 0, 0, 0, 0, -913, 1087, 0, 0, 0, 0, -922, -777)
+}
+point_count = 11
+
 [node name="Test" type="Node2D" unique_id=1115389140]
 script = ExtResource("1_da6vm")
 
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=976736944]
+layer = -30
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=1070211585]
+offset_top = 4.0
+offset_right = 3120.0
+offset_bottom = 1706.0
+color = Color(0, 0, 0, 1)
+
 [node name="Player" parent="." unique_id=2057214509 instance=ExtResource("2_st4qh")]
-position = Vector2(581, 327)
+position = Vector2(1482, 901)
+platform_floor_layers = 4294901760
+
+[node name="Path2D" type="Path2D" parent="Player" unique_id=2075246612]
+position = Vector2(-620, -158)
+curve = SubResource("Curve2D_st4qh")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1428995615]
+unique_name_in_owner = true
+position = Vector2(296.9326, 1100.0106)
+rotation = 3.1266348
+progress = 7238.3647
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=290768885]
 
@@ -32,3 +58,9 @@ offset_right = -554.0
 offset_bottom = -393.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Timer" type="Timer" parent="." unique_id=1950464140]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

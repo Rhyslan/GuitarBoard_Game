@@ -14,3 +14,5 @@ texture = ExtResource("1_symyc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=534078518]
 shape = SubResource("RectangleShape2D_abrql")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1237259525]
