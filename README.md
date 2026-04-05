@@ -1,5 +1,5 @@
 # Requirements
-- [Godot 4.6.1](https://downloads.godotengine.org/?version=4.6.1&flavor=stable&slug=win64.exe.zip&platform=windows.64)
+- [Godot](https://godotengine.org/) 4.6.1 ([download link](https://downloads.godotengine.org/?version=4.6.1&flavor=stable&slug=win64.exe.zip&platform=windows.64))
 - (Optional for Wii Balance Board) [WiiBalanceWalker v0.5](https://github.com/lshachar/WiiBalanceWalker)
 - (Optional for Wii Guitar) [WiitarThing](https://github.com/Meowmaritus/WiitarThing)
 
