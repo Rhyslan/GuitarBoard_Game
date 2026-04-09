@@ -1,6 +1,7 @@
 extends Node2D
 
 var input_list = "Actions pressed:\n"
+@onready var player = get_node("/root/Test/Player")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,6 +39,7 @@ func _process(delta: float) -> void:
 		input_list += "Reloading\n"
 	
 	$CanvasLayer/UI/Label.text = input_list
+	$CanvasLayer/UI/Health.text = "Health: " + str(player.health)
 	
 	# spawn path follows the player
 	# spawning always out of view
