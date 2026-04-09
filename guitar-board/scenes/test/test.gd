@@ -1,11 +1,18 @@
 extends Node2D
 
 var input_list = "Actions pressed:\n"
+<<<<<<< Updated upstream
 @onready var player = get_node("/root/Test/Player")
+=======
+var round
+var round_timer
+signal round_change(new_round)
+>>>>>>> Stashed changes
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	round = 1
+	round_timer = 0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,6 +47,13 @@ func _process(delta: float) -> void:
 	
 	$CanvasLayer/UI/Label.text = input_list
 	$CanvasLayer/UI/Health.text = "Health: " + str(player.health)
+	
+	# Round timer updates, after 60 seconds round updates
+	round_timer += delta
+	if round_timer >= 30:
+		round_timer = 0
+		round += 1
+		round_change.emit(round)
 	
 	# spawn path follows the player
 	# spawning always out of view

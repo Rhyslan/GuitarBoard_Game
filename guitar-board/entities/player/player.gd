@@ -1,9 +1,12 @@
 extends CharacterBody2D
 
+<<<<<<< Updated upstream
 
 @export var Bullet : PackedScene
 
 # Movement
+=======
+>>>>>>> Stashed changes
 @export var speed = 400.0
 @export var rot_speed = 5.0
 var rot_vel = 0
