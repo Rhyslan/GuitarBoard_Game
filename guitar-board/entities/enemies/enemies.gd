@@ -25,6 +25,6 @@ func take_damage(damage_taken):
 	health -= damage_taken
 	# sub in hurt animation here
 	
-	if health == 0:
+	if health <= 0:
 		queue_free()
 	# death animation down here (add as child) and play on global pos
