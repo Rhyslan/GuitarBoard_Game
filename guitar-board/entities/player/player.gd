@@ -15,7 +15,10 @@ func get_input():
 	var input_dir = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = input_dir * speed
 
-
+func get_hit():
+	health-=2
+	
+	
 func _physics_process(delta: float) -> void:
 	get_input()
 	move_and_slide()
