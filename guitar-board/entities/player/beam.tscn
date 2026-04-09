@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dpydk6uympif0"]
+
+[ext_resource type="Script" uid="uid://dy76fbmv72act" path="res://entities/player/beam.gd" id="1_7u0ro"]
+[ext_resource type="Texture2D" uid="uid://b3gnxabljblmq" path="res://assets/beam.png" id="2_idiqm"]
+
+[node name="Beam" type="RayCast2D" unique_id=942872429]
+target_position = Vector2(0, -50)
+script = ExtResource("1_7u0ro")
+
+[node name="Line2D" type="Line2D" parent="." unique_id=730368625]
+points = PackedVector2Array(0, 0, 0, -50)
+width = 20.0
+texture = ExtResource("2_idiqm")
+texture_mode = 2
+end_cap_mode = 2

@@ -58,9 +58,13 @@ func get_input():
 			dash()
 	if Input.is_action_pressed("Attack"):
 		if selectedActions["beam"]:
-			beam()
+			$Beam.set_is_casting(true)
+		else:
+			$Beam.set_is_casting(false)
 		if selectedActions["shield"]:
 			shield()
+	else:
+		$Beam.set_is_casting(false)
 
 func jump():
 	print("jumped")
@@ -70,10 +74,6 @@ func gun():
 	var b = Bullet.instantiate()
 	self.get_parent().add_child(b)
 	b.transform = $AttackSpawn.global_transform
-
-
-func beam():
-	print("holding beam")
 
 
 func slash():

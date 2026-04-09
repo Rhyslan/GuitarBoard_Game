@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://46e1880n55v4"]
+
+[ext_resource type="Script" uid="uid://dxwbwlajqkn0t" path="res://entities/player/slash.gd" id="1_mvm5g"]
+[ext_resource type="Texture2D" uid="uid://cdjqia8mk0pyc" path="res://assets/slash.png" id="2_ii8qm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkugw"]
+size = Vector2(186, 71)
+
+[node name="Slash" type="Area2D" unique_id=822047906]
+visible = false
+script = ExtResource("1_mvm5g")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="." unique_id=334181344]
+position = Vector2(0, -102)
+shape = SubResource("RectangleShape2D_fkugw")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=783822637]
+modulate = Color(1, 1, 1, 0.53333336)
+position = Vector2(0, -143)
+texture = ExtResource("2_ii8qm")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
