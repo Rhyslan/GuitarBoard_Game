@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var speed = 400.0
 @export var rot_speed = 5.0
 var rot_vel = 0
+var health = 50
 
 func get_input():
 	# Rotation
