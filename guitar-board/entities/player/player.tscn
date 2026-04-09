@@ -2,12 +2,19 @@
 
 [ext_resource type="Script" uid="uid://bnueex7p0hhet" path="res://entities/player/player.gd" id="1_abrql"]
 [ext_resource type="Texture2D" uid="uid://ia7x8qr8jrxi" path="res://icon.svg" id="1_symyc"]
+[ext_resource type="PackedScene" uid="uid://bhmf7u255m5s6" path="res://entities/player/bullet.tscn" id="2_sglur"]
+[ext_resource type="Texture2D" uid="uid://cdjqia8mk0pyc" path="res://assets/slash.png" id="4_bls4j"]
+[ext_resource type="Script" uid="uid://dxwbwlajqkn0t" path="res://entities/player/slash.gd" id="4_fkugw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_abrql"]
 size = Vector2(128, 128)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkugw"]
+size = Vector2(186, 71)
+
 [node name="Player" type="CharacterBody2D" unique_id=2057214509]
 script = ExtResource("1_abrql")
+Bullet = ExtResource("2_sglur")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1378449976]
 texture = ExtResource("1_symyc")
@@ -16,3 +23,22 @@ texture = ExtResource("1_symyc")
 shape = SubResource("RectangleShape2D_abrql")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1237259525]
+
+[node name="AttackSpawn" type="Marker2D" parent="." unique_id=896916255]
+position = Vector2(0, -77)
+
+[node name="Slash" type="Area2D" parent="." unique_id=716143964]
+visible = false
+script = ExtResource("4_fkugw")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Slash" unique_id=1352162223]
+position = Vector2(0, -102)
+shape = SubResource("RectangleShape2D_fkugw")
+
+[node name="Sprite2D" type="Sprite2D" parent="Slash" unique_id=2118889548]
+modulate = Color(1, 1, 1, 0.53333336)
+position = Vector2(0, -143)
+texture = ExtResource("4_bls4j")
+
+[connection signal="body_entered" from="Slash" to="Slash" method="_on_body_entered"]
+[connection signal="body_exited" from="Slash" to="Slash" method="_on_body_exited"]

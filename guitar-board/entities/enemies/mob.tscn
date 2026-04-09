@@ -8,7 +8,7 @@ size = Vector2(33, 31)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xapus"]
 
-[node name="Mob" type="CharacterBody2D" unique_id=409378065]
+[node name="Mob" type="CharacterBody2D" unique_id=409378065 groups=["mobs"]]
 platform_floor_layers = 4294901760
 script = ExtResource("1_d8mg4")
 
@@ -21,7 +21,7 @@ texture = ExtResource("2_ns7y6")
 position = Vector2(0, -16)
 shape = SubResource("RectangleShape2D_483dy")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=823155647]
+[node name="Area2D" type="Area2D" parent="." unique_id=823155647 groups=["mobs"]]
 position = Vector2(2.9999924, 46.999996)
 scale = Vector2(-1.704392, 1.5044888)
 

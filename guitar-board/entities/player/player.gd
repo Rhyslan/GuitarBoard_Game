@@ -1,9 +1,32 @@
 extends CharacterBody2D
 
 
+@export var Bullet : PackedScene
+
+# Movement
 @export var speed = 400.0
 @export var rot_speed = 5.0
 var rot_vel = 0
+
+# Actions
+var selectedActions = {
+	"gun": false, 
+	"beam": false, 
+	"slash": false, 
+	"dash": false, 
+	"shield": false
+}
+@export var gun_amount = 25
+@export var beam_amount = 50
+@export var beam_deplete_rate = 5
+@export var beam_refill_rate = 2
+@export var slash_cooldown = 5
+@export var dash_cooldown = 2
+@export var shield_amount = 20
+@export var shield_deplete_rate = 5
+@export var shield_refill_rate = 2
+
+@onready var slash_area = $Slash
 
 func get_input():
 	# Rotation
@@ -13,6 +36,61 @@ func get_input():
 	# Movement
 	var input_dir = Input.get_vector("Left", "Right", "Up", "Down")
 	velocity = input_dir * speed
+	
+	# Actions
+	selectedActions["gun"] = Input.is_action_pressed("Gun")
+	selectedActions["beam"] = Input.is_action_pressed("Beam")
+	selectedActions["slash"] = Input.is_action_pressed("Slash")
+	selectedActions["dash"] = Input.is_action_pressed("Dash")
+	selectedActions["shield"] = Input.is_action_pressed("Shield")
+	if Input.is_action_just_pressed("Jump"):
+		jump()
+	if Input.is_action_just_pressed("Reload"):
+		reload()
+	
+	if Input.is_action_just_pressed("Attack"):
+		if selectedActions["gun"]:
+			gun()
+		if selectedActions["slash"]:
+			slash()
+		if selectedActions["dash"]:
+			dash()
+	if Input.is_action_pressed("Attack"):
+		if selectedActions["beam"]:
+			beam()
+		if selectedActions["shield"]:
+			shield()
+
+func jump():
+	print("jumped")
+
+
+func gun():
+	var b = Bullet.instantiate()
+	self.get_parent().add_child(b)
+	b.transform = $AttackSpawn.global_transform
+
+
+func beam():
+	print("holding beam")
+
+
+func slash():
+	slash_area.visible = true
+	get_tree().create_timer(0.1).timeout.connect(func(): slash_area.visible = false)
+	
+
+
+func dash():
+	print("dashed")
+
+
+func shield():
+	print("holding shield")
+
+
+func reload():
+	print("Starting reload")
 
 
 func _physics_process(delta: float) -> void:

@@ -16,6 +16,7 @@ script = ExtResource("1_da6vm")
 layer = -30
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=1070211585]
+visible = false
 offset_top = 4.0
 offset_right = 3120.0
 offset_bottom = 1706.0
