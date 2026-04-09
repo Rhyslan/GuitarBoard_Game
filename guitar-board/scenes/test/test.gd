@@ -1,13 +1,10 @@
 extends Node2D
 
 var input_list = "Actions pressed:\n"
-<<<<<<< Updated upstream
 @onready var player = get_node("/root/Test/Player")
-=======
 var round
 var round_timer
 signal round_change(new_round)
->>>>>>> Stashed changes
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
