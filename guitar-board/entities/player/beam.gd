@@ -1,4 +1,6 @@
-extends RayCast2D
+extends ShapeCast2D
+
+@export var dmg_per_sec := 1.0
 
 @export var cast_speed := 7000.0
 @export var max_length := 1400.0
@@ -24,19 +26,22 @@ func _physics_process(delta: float) -> void:
 	target_position = target_position.move_toward(Vector2.UP * max_length, cast_speed * delta)
 	
 	var end_pos := target_position
-	force_raycast_update()
+	force_shapecast_update()
 	
 	if is_colliding():
-		end_pos = to_local(get_collision_point())
+		end_pos = to_local(get_collision_point(0))
+		for collision in range(get_collision_count()):
+			var body = get_collider(collision)
+			if body.get_class() == "CharacterBody2D":
+				if (body as CharacterBody2D).is_in_group("mobs"):
+					body.take_damage(dmg_per_sec * delta)
 	
 	line.points[1] = end_pos
 
 func set_is_casting(new_val: bool):
 	if is_casting == new_val:
 		return
-		
-	if new_val == false:
-		print("not")
+	
 	is_casting = new_val
 	
 	set_physics_process(is_casting)
@@ -60,12 +65,12 @@ func appear() -> void:
 	if tween and tween.is_running():
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(line, "width", line_width, growth_time * 2).from(0.0)
+	tween.tween_property(line, "width", line_width, growth_time).from(0.0)
 
 
 func disappear() -> void:
 	if tween and tween.is_running():
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(line, "width", 0.0, growth_time * 2).from_current()
+	tween.tween_property(line, "width", 0.0, growth_time).from_current()
 	tween.tween_callback(line.hide)

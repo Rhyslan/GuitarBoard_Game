@@ -79,7 +79,6 @@ func gun():
 func slash():
 	slash_area.visible = true
 	get_tree().create_timer(0.1).timeout.connect(func(): slash_area.visible = false)
-	
 
 
 func dash():
