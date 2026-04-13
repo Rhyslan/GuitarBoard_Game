@@ -11,7 +11,7 @@ func _on_body_entered(body: Node2D) -> void:
 func _physics_process(delta: float) -> void:
 	if visible and len(mobs) > 0:
 		for mob in mobs:
-			mob.queue_free()
+			mob.take_damage(3)
 
 
 func _on_body_exited(body: Node2D) -> void:

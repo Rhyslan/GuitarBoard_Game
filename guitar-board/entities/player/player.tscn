@@ -27,3 +27,4 @@ position = Vector2(0, -77)
 [node name="Slash" parent="." unique_id=822047906 instance=ExtResource("4_fkugw")]
 
 [node name="Beam" parent="." unique_id=942872429 instance=ExtResource("5_8fjmc")]
+dmg_per_sec = 10.0

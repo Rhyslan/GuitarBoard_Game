@@ -3,7 +3,8 @@ extends CharacterBody2D
 # Change variables (hp, etc) for individual enemies
 
 # health = hits to die
-var health = 2
+@export var health := 2.0
+@export var dmg_per_sec := 1.0
 
 @onready var player = get_node("/root/Test/Player")
 #follows player position
@@ -13,18 +14,16 @@ func _physics_process(delta):
 	move_and_slide()
 	
 	#enemy collision
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-		
-		
-	
+	#for i in get_slide_collision_count():
+	#	var collision = get_slide_collision(i)
+	#	var collider = collision.get_collider()
+
 
 # Deletes mob when hp = 0
-func take_damage(damage_taken):
+func take_damage(damage_taken: float):
 	health -= damage_taken
 	# sub in hurt animation here
 	
-	if health <= 0:
+	if health <= 0.0:
 		queue_free()
 	# death animation down here (add as child) and play on global pos
