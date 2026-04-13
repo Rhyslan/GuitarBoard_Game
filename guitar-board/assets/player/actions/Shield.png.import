@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdjqia8mk0pyc"
-path="res://.godot/imported/slash.png-17066201815f4a480edae487c8cf2325.ctex"
+uid="uid://rr48l62p684p"
+path="res://.godot/imported/Shield.png-d9cbbf863f5ea1c2d0351bee309e0eb9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/slash.png"
-dest_files=["res://.godot/imported/slash.png-17066201815f4a480edae487c8cf2325.ctex"]
+source_file="res://assets/player/actions/Shield.png"
+dest_files=["res://.godot/imported/Shield.png-d9cbbf863f5ea1c2d0351bee309e0eb9.ctex"]
 
 [params]
 

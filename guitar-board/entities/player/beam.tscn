@@ -1,19 +1,27 @@
 [gd_scene format=3 uid="uid://dpydk6uympif0"]
 
 [ext_resource type="Script" uid="uid://dy76fbmv72act" path="res://entities/player/beam.gd" id="1_7u0ro"]
-[ext_resource type="Texture2D" uid="uid://b3gnxabljblmq" path="res://assets/beam.png" id="2_idiqm"]
+[ext_resource type="Texture2D" uid="uid://jv7a3pd1clyc" path="res://assets/player/actions/beam.png" id="2_idiqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idiqm"]
 size = Vector2(80, 80)
+
+[sub_resource type="AnimatedTexture" id="AnimatedTexture_7u0ro"]
+frames = 4
+frame_0/texture = ExtResource("2_idiqm")
+frame_1/duration = 1.0
+frame_2/duration = 1.0
+frame_3/duration = 1.0
 
 [node name="Beam" type="ShapeCast2D" unique_id=322907689]
 shape = SubResource("RectangleShape2D_idiqm")
 target_position = Vector2(0, 0)
 script = ExtResource("1_7u0ro")
+start_distance = 0.0
 
 [node name="Line2D" type="Line2D" parent="." unique_id=730368625]
-points = PackedVector2Array(0, 0, 0, -50)
+visible = false
+points = PackedVector2Array(0, 0, 0, -68)
 width = 80.0
-texture = ExtResource("2_idiqm")
+texture = SubResource("AnimatedTexture_7u0ro")
 texture_mode = 2
-end_cap_mode = 2
