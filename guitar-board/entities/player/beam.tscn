@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpydk6uympif0"]
 
 [ext_resource type="Script" uid="uid://dy76fbmv72act" path="res://entities/player/beam.gd" id="1_7u0ro"]
-[ext_resource type="Texture2D" uid="uid://b3gnxabljblmq" path="res://assets/beam.png" id="2_idiqm"]
+[ext_resource type="Texture2D" uid="uid://b3gnxabljblmq" path="res://assets/attacks/beam.png" id="2_idiqm"]
 
 [node name="Beam" type="RayCast2D" unique_id=942872429]
 target_position = Vector2(0, -50)

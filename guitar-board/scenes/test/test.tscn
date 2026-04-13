@@ -117,9 +117,6 @@ offset_right = 51.0
 offset_bottom = 125.0
 text = "Health"
 
-[node name="Timer" type="Timer" parent="." unique_id=1950464140]
-wait_time = 2.0
-autostart = true
 [node name="Resources" type="MarginContainer" parent="CanvasLayer/UI" unique_id=591660455]
 layout_mode = 1
 anchors_preset = 2
@@ -204,10 +201,86 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Score: "
 
-[node name="SpawnTimer" type="Timer" parent="." unique_id=1950464140]
+[node name="PauseMenu" type="CenterContainer" parent="CanvasLayer/UI" unique_id=455914564]
+process_mode = 2
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/PauseMenu" unique_id=140075444]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/PauseMenu/VBoxContainer" unique_id=1503920248]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="UnpauseButton" type="Button" parent="CanvasLayer/UI/PauseMenu/VBoxContainer" unique_id=719933735]
+layout_mode = 2
+text = "Continue"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/UI/PauseMenu/VBoxContainer" unique_id=909247421]
+layout_mode = 2
+text = "Quit"
+
+[node name="GameOverMenu" type="CenterContainer" parent="CanvasLayer/UI" unique_id=1064833823]
+process_mode = 2
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/GameOverMenu" unique_id=2085418354]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Label" type="Label" parent="CanvasLayer/UI/GameOverMenu/VBoxContainer" unique_id=1707534852]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="CanvasLayer/UI/GameOverMenu/VBoxContainer" unique_id=476042211]
+layout_mode = 2
+text = "Retry"
+
+[node name="QuitButton" type="Button" parent="CanvasLayer/UI/GameOverMenu/VBoxContainer" unique_id=1874339160]
+layout_mode = 2
+text = "Quit"
+
+[node name="Timer" type="Timer" parent="." unique_id=1950464140]
+wait_time = 2.0
+autostart = true
+
+[node name="SpawnTimer" type="Timer" parent="." unique_id=536985016]
 autostart = true
 script = ExtResource("4_51e2l")
 
 [connection signal="round_change" from="." to="CanvasLayer/UI" method="_on_test_round_change"]
 [connection signal="round_change" from="." to="SpawnTimer" method="_on_round_change"]
+[connection signal="game_over_signal" from="Player" to="CanvasLayer/UI" method="_on_player_game_over_signal"]
+[connection signal="pause_pressed" from="Player" to="CanvasLayer/UI" method="_on_player_pause_pressed"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
