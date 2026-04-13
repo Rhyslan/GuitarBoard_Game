@@ -102,12 +102,13 @@ func get_hit(health_lost):
 		game_over()
 		
 
+
 #game over (temp)
 func game_over():
 	health = 0
 	print("Game Over!")
-	
-	
+
+
 func _physics_process(delta: float) -> void:
 	get_input()
 	move_and_slide()
