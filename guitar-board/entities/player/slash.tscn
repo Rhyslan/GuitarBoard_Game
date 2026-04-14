@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://46e1880n55v4"]
 
 [ext_resource type="Script" uid="uid://dxwbwlajqkn0t" path="res://entities/player/slash.gd" id="1_mvm5g"]
-[ext_resource type="Texture2D" uid="uid://cdjqia8mk0pyc" path="res://assets/attacks/slash.png" id="2_ii8qm"]
+[ext_resource type="Texture2D" uid="uid://cpkc74hd3lnl0" path="res://assets/player/actions/slash.png" id="2_mvm5g"]
 
 [node name="Slash" type="Area2D" unique_id=2007548748]
 collision_layer = 2
