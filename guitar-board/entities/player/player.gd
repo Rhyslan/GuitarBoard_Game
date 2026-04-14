@@ -85,7 +85,6 @@ func gun():
 func slash():
 	slash_area.visible = true
 	get_tree().create_timer(0.1).timeout.connect(func(): slash_area.visible = false)
-	
 
 
 func dash():
@@ -121,6 +120,6 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		if collision.get_collider().name == "Mob":
-			get_hit(2)
-	
+		if collider.get_class() == "CharacterBody2D":
+				if (collider as CharacterBody2D).is_in_group("mobs"):
+					get_hit(collider.dmg_per_sec * delta)
