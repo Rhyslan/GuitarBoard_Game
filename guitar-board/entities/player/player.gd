@@ -1,6 +1,5 @@
 class_name Player extends CharacterBody2D
 
-
 signal pause_pressed()
 signal game_over_signal()
 
