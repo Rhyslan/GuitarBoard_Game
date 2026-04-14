@@ -1,14 +1,15 @@
-extends CharacterBody2D
+class_name Mob extends CharacterBody2D
 # EnemyLogic all here, use as script for all enemies
 # Change variables (hp, etc) for individual enemies
 
-# health = hits to die
 @export var health := 2.0
 @export var dmg_per_sec := 1.0
 
-@onready var player = get_node("/root/Test/Player")
+@onready var player := get_node("/root/Test/Player")
+
+
 #follows player position
-func _physics_process(delta):
+func _physics_process(delta: float):
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * 300.0
 	move_and_slide()

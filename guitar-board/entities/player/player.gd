@@ -1,35 +1,73 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 
-@export var Bullet : PackedScene
+@export var ui: GameUI
+@export var max_health := 100.0
 
-# Movement
-@export var speed = 400.0
-@export var rot_speed = 5.0
-var rot_vel = 0
-var health = 100
+@export_category("Movement")
+@export var speed := 400.0
+@export var rot_speed := 5.0
 
-# Actions
-var selectedActions = {
+@export_category("Actions")
+@export var max_bullet_count := 25
+@export var max_beam_amount := 100
+@export var beam_deplete_rate := 5
+@export var beam_refill_rate := 2
+@export var slash_cooldown := 5
+@export var dash_cooldown := 2
+@export var max_shield_amount := 100
+@export var shield_deplete_rate := 5
+@export var shield_refill_rate := 2
+
+var rot_vel := 0.0
+var health := max_health
+var selectedActions := {
 	"gun": false, 
 	"beam": false, 
 	"slash": false, 
 	"dash": false, 
 	"shield": false
 }
-@export var gun_amount = 25
-@export var beam_amount = 50
-@export var beam_deplete_rate = 5
-@export var beam_refill_rate = 2
-@export var slash_cooldown = 5
-@export var dash_cooldown = 2
-@export var shield_amount = 20
-@export var shield_deplete_rate = 5
-@export var shield_refill_rate = 2
 
-@onready var slash_area = $Slash
+var reloading := false
+var beam_state := "refil"
 
-func get_input():
+@onready var bullets_remaining: float = max_bullet_count
+@onready var beam_remaining: float = max_beam_amount
+@onready var shield_remaining: float = max_shield_amount
+@onready var bullet := preload("res://entities/player/bullet.tscn")
+@onready var beam := $Beam
+@onready var slash := $Slash
+@onready var attack_spawn := $AttackSpawn
+
+
+func _ready() -> void:
+	ui.set_max_values(max_health, max_shield_amount, max_beam_amount)
+
+
+func _physics_process(delta: float) -> void:
+	ui.update_display(health, round(bullets_remaining), beam_remaining, shield_remaining, slash_cooldown)
+	get_input(delta)
+	move_and_slide()
+	
+	if reloading:
+		if bullets_remaining < max_bullet_count:
+			bullets_remaining += 5 * delta
+		
+		if bullets_remaining >= max_bullet_count:
+			reloading = false
+	
+	#everything the player hits
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if collider.get_class() == "CharacterBody2D":
+				if (collider as CharacterBody2D).is_in_group("mobs"):
+					get_hit(collider.dmg_per_sec * delta)
+
+
+func get_input(delta: float):
 	# Rotation
 	rot_vel = Input.get_axis("Spin Left", "Spin Right")
 	rotation += deg_to_rad(rot_vel * rot_speed)
@@ -44,41 +82,74 @@ func get_input():
 	selectedActions["slash"] = Input.is_action_pressed("Slash")
 	selectedActions["dash"] = Input.is_action_pressed("Dash")
 	selectedActions["shield"] = Input.is_action_pressed("Shield")
+	
 	if Input.is_action_just_pressed("Jump"):
 		jump()
+	
 	if Input.is_action_just_pressed("Reload"):
-		reload()
+		reloading = true
 	
 	if Input.is_action_just_pressed("Attack"):
 		if selectedActions["gun"]:
-			gun()
+			shoot()
 		if selectedActions["slash"]:
-			slash()
+			do_slash()
 		if selectedActions["dash"]:
 			dash()
+	
 	if Input.is_action_pressed("Attack"):
 		if selectedActions["beam"]:
-			$Beam.set_is_casting(true)
+			beam.set_is_casting(true)
+			beam_deplete(delta)
 		else:
-			$Beam.set_is_casting(false)
+			beam.set_is_casting(false)
+			beam_refil(delta)
+		
 		if selectedActions["shield"]:
 			shield()
 	else:
-		$Beam.set_is_casting(false)
+		beam.set_is_casting(false)
+		beam_refil(delta)
 
 func jump():
 	print("jumped")
 
 
-func gun():
-	var b = Bullet.instantiate()
-	self.get_parent().add_child(b)
-	b.transform = $AttackSpawn.global_transform
+func shoot():
+	if bullets_remaining > 0 and not reloading:
+		var b = bullet.instantiate()
+		self.get_parent().add_child(b)
+		b.transform = attack_spawn.global_transform
+		bullets_remaining -= 1
+		
+		if bullets_remaining < 0:
+			bullets_remaining = 0
+	elif reloading:
+		# Put currently reloading warning here
+		print("currently reloading")
+	else:
+		# Put reload warning here
+		print("need to reload")
 
 
-func slash():
-	slash_area.visible = true
-	get_tree().create_timer(0.1).timeout.connect(func(): slash_area.visible = false)
+func beam_deplete(delta: float):
+	if beam_remaining > 0.0 and beam.is_casting:
+		beam_remaining -= beam_deplete_rate * delta
+		
+		if beam_remaining < 0.0:
+			beam_remaining = 0.0
+
+
+func beam_refil(delta: float):
+	if beam_remaining <= max_beam_amount and not beam.is_casting:
+		beam_remaining += beam_refill_rate * delta
+		
+		if beam_remaining > max_beam_amount:
+			beam_remaining = max_beam_amount
+
+
+func do_slash():
+	slash.attack()
 
 
 func dash():
@@ -87,11 +158,6 @@ func dash():
 
 func shield():
 	print("holding shield")
-
-
-func reload():
-	print("Starting reload")
-
 
 
 func get_hit(health_lost):
@@ -106,17 +172,3 @@ func get_hit(health_lost):
 func game_over():
 	health = 0
 	print("Game Over!")
-
-
-func _physics_process(delta: float) -> void:
-	get_input()
-	move_and_slide()
-	
-	#everything the player hits
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		var collider = collision.get_collider()
-		
-		if collider.get_class() == "CharacterBody2D":
-				if (collider as CharacterBody2D).is_in_group("mobs"):
-					get_hit(collider.dmg_per_sec * delta)

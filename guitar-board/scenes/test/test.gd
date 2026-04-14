@@ -1,18 +1,15 @@
 extends Node2D
 
-var input_list = "Actions pressed:\n"
-@onready var player = get_node("/root/Test/Player")
-var round
-var round_timer
 signal round_change(new_round)
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	round = 1
-	round_timer = 0
+var input_list = "Actions pressed:\n"
+var mob := preload("res://entities/enemies/mob.tscn")
+
+@onready var round := 1
+@onready var round_timer := 0
+@onready var player = get_node("/root/Test/Player")
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	input_list = "Actions pressed:\n"
 	# Movement
@@ -42,8 +39,8 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("Reload"):
 		input_list += "Reloading\n"
 	
-	$CanvasLayer/UI/Label.text = input_list
-	$CanvasLayer/UI/Health.text = "Health: " + str(player.health)
+	$"UI Canvas/UI/Label".text = input_list
+	#$CanvasLayer/UI/Health.text = "Health: " + str(player.health)
 	
 	# Round timer updates, after 60 seconds round updates
 	round_timer += delta
@@ -55,13 +52,17 @@ func _process(delta: float) -> void:
 	# spawn path follows the player
 	# spawning always out of view
 	# random spawning anywhere on path2d rectangle
+
+
 func spawn_mob():
-	var new_mob = preload("res://entities/enemies/mob.tscn").instantiate()
+	var new_mob = mob.instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_mob.global_position = %PathFollow2D.global_position
 	add_child(new_mob)
 	
 	#connected spawner to timer
 	#change wait time in inspector for timer to increase or decrease rate
+
+
 func _on_timer_timeout():
 	spawn_mob()

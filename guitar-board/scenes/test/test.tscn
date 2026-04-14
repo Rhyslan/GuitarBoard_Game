@@ -2,17 +2,11 @@
 
 [ext_resource type="Script" uid="uid://ch6mhsl4nbe4e" path="res://scenes/test/test.gd" id="1_da6vm"]
 [ext_resource type="PackedScene" uid="uid://bg6bi64miavng" path="res://entities/player/player.tscn" id="2_st4qh"]
-[ext_resource type="Script" path="res://scenes/test/ui.gd" id="3_st4qh"]
-[ext_resource type="Script" path="res://scenes/test/spawn_timer.gd" id="4_51e2l"]
-[ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="5_oj4i3"]
-
-[sub_resource type="Curve2D" id="Curve2D_st4qh"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -913, -781, 0, 0, 0, 0, 208, -794, 0, 0, 0, 0, 889, -777, 0, 0, 0, 0, 1578, -799, 0, 0, 0, 0, 2365, -817, 0, 0, 0, 0, 2361, 220, 0, 0, 0, 0, 2356, 407, 0, 0, 0, 0, 2370, 1069, 0, 0, 0, 0, -304, 1109, 0, 0, 0, 0, -913, 1087, 0, 0, 0, 0, -922, -777)
-}
-point_count = 11
+[ext_resource type="Script" uid="uid://bhyhscjyq2jpa" path="res://scenes/test/ui.gd" id="3_st4qh"]
+[ext_resource type="Script" uid="uid://cmh6c1tpt43tt" path="res://scenes/test/spawn_timer.gd" id="4_51e2l"]
 
 [sub_resource type="Gradient" id="Gradient_51e2l"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_oj4i3"]
 gradient = SubResource("Gradient_51e2l")
@@ -20,8 +14,7 @@ width = 200
 height = 30
 
 [sub_resource type="Gradient" id="Gradient_st4qh"]
-offsets = PackedFloat32Array(0, 0.023316063, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.81088084, 0.81088084, 0.81088084, 1, 1, 1, 1, 1)
+colors = PackedColorArray(1, 1, 1, 0.19607843, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_1suh2"]
 gradient = SubResource("Gradient_st4qh")
@@ -29,6 +22,7 @@ width = 200
 height = 30
 
 [sub_resource type="Gradient" id="Gradient_2ns80"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5unt0"]
 gradient = SubResource("Gradient_2ns80")
@@ -36,6 +30,7 @@ width = 200
 height = 30
 
 [sub_resource type="Gradient" id="Gradient_saoeg"]
+colors = PackedColorArray(1, 1, 1, 0.19607843, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_we7ej"]
 gradient = SubResource("Gradient_saoeg")
@@ -43,6 +38,7 @@ width = 200
 height = 30
 
 [sub_resource type="Gradient" id="Gradient_xi5sv"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_2dgve"]
 gradient = SubResource("Gradient_xi5sv")
@@ -50,44 +46,25 @@ width = 400
 height = 40
 
 [sub_resource type="Gradient" id="Gradient_x4ubh"]
-offsets = PackedFloat32Array(0, 0.0077720205, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.5466321, 0.5466321, 0.5466321, 1, 1, 1, 1, 1)
+colors = PackedColorArray(1, 1, 1, 0.19607843, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xm0ii"]
 gradient = SubResource("Gradient_x4ubh")
 width = 400
 height = 40
 
+[sub_resource type="Curve2D" id="Curve2D_st4qh"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -913, -781, 0, 0, 0, 0, 208, -794, 0, 0, 0, 0, 889, -777, 0, 0, 0, 0, 1578, -799, 0, 0, 0, 0, 2365, -817, 0, 0, 0, 0, 2361, 220, 0, 0, 0, 0, 2356, 407, 0, 0, 0, 0, 2370, 1069, 0, 0, 0, 0, -304, 1109, 0, 0, 0, 0, -913, 1087, 0, 0, 0, 0, -922, -777)
+}
+point_count = 11
+
 [node name="Test" type="Node2D" unique_id=1115389140]
 script = ExtResource("1_da6vm")
 
-[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=976736944]
-layer = -30
+[node name="UI Canvas" type="CanvasLayer" parent="." unique_id=290768885]
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer2" unique_id=1070211585]
-visible = false
-offset_top = 4.0
-offset_right = 3120.0
-offset_bottom = 1706.0
-color = Color(0, 0, 0, 1)
-
-[node name="Player" parent="." unique_id=2057214509 instance=ExtResource("2_st4qh")]
-position = Vector2(1482, 901)
-platform_floor_layers = 4294901760
-
-[node name="Path2D" type="Path2D" parent="Player" unique_id=2075246612]
-position = Vector2(-620, -158)
-curve = SubResource("Curve2D_st4qh")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1428995615]
-unique_name_in_owner = true
-position = Vector2(296.9326, 1100.0106)
-rotation = 3.1266348
-progress = 7238.3647
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=290768885]
-
-[node name="UI" type="Control" parent="CanvasLayer" unique_id=1087382895]
+[node name="UI" type="Control" parent="UI Canvas" unique_id=1087382895]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -98,7 +75,7 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_st4qh")
 
-[node name="Label" type="Label" parent="CanvasLayer/UI" unique_id=655064835]
+[node name="Label" type="Label" parent="UI Canvas/UI" unique_id=655064835]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,7 +87,7 @@ offset_bottom = -393.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Health" type="Label" parent="CanvasLayer/UI" unique_id=419913043]
+[node name="Health" type="Label" parent="UI Canvas/UI" unique_id=419913043]
 layout_mode = 0
 offset_left = -1.0
 offset_top = 102.0
@@ -118,7 +95,7 @@ offset_right = 51.0
 offset_bottom = 125.0
 text = "Health"
 
-[node name="Resources" type="MarginContainer" parent="CanvasLayer/UI" unique_id=591660455]
+[node name="Resources" type="MarginContainer" parent="UI Canvas/UI" unique_id=591660455]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -129,42 +106,44 @@ grow_vertical = 0
 theme_override_constants/margin_left = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/Resources" unique_id=317080268]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Canvas/UI/Resources" unique_id=317080268]
 layout_mode = 2
 alignment = 2
 
-[node name="HBoxGunSlash" type="HBoxContainer" parent="CanvasLayer/UI/Resources/VBoxContainer" unique_id=1816232432]
+[node name="HBoxGunSlash" type="HBoxContainer" parent="UI Canvas/UI/Resources/VBoxContainer" unique_id=1816232432]
 layout_mode = 2
 
-[node name="Ammo" type="Label" parent="CanvasLayer/UI/Resources/VBoxContainer/HBoxGunSlash" unique_id=1057865712]
+[node name="Ammo" type="Label" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxGunSlash" unique_id=1057865712]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Ammo: "
 
-[node name="SlashCD" type="Label" parent="CanvasLayer/UI/Resources/VBoxContainer/HBoxGunSlash" unique_id=37117989]
+[node name="SlashCD" type="Label" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxGunSlash" unique_id=37117989]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 20
 text = "Slash: "
 
-[node name="HBoxBeamShield" type="HBoxContainer" parent="CanvasLayer/UI/Resources/VBoxContainer" unique_id=1722619213]
+[node name="HBoxBeamShield" type="HBoxContainer" parent="UI Canvas/UI/Resources/VBoxContainer" unique_id=1722619213]
 layout_mode = 2
 
-[node name="BeamBar" type="TextureProgressBar" parent="CanvasLayer/UI/Resources/VBoxContainer/HBoxBeamShield" unique_id=331659241]
+[node name="BeamBar" type="TextureProgressBar" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxBeamShield" unique_id=331659241]
 layout_mode = 2
+value = 100.0
 texture_under = SubResource("GradientTexture2D_oj4i3")
 texture_progress = SubResource("GradientTexture2D_1suh2")
 tint_under = Color(0.30106175, 0.0077020964, 0.010997816, 1)
 tint_progress = Color(1, 0, 0, 1)
 
-[node name="ShieldBar" type="TextureProgressBar" parent="CanvasLayer/UI/Resources/VBoxContainer/HBoxBeamShield" unique_id=905245998]
+[node name="ShieldBar" type="TextureProgressBar" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxBeamShield" unique_id=905245998]
 layout_mode = 2
+value = 100.0
 texture_under = SubResource("GradientTexture2D_5unt0")
 texture_progress = SubResource("GradientTexture2D_we7ej")
 tint_under = Color(0.39255267, 0.16630164, 0, 1)
 tint_progress = Color(1, 0.46666667, 0, 1)
 
-[node name="HealthBar" type="TextureProgressBar" parent="CanvasLayer/UI/Resources/VBoxContainer" unique_id=1049492044]
+[node name="HealthBar" type="TextureProgressBar" parent="UI Canvas/UI/Resources/VBoxContainer" unique_id=1049492044]
 layout_mode = 2
 size_flags_vertical = 8
 value = 100.0
@@ -173,7 +152,7 @@ texture_progress = SubResource("GradientTexture2D_xm0ii")
 tint_under = Color(0.13333334, 0.18431373, 0.13333334, 1)
 tint_progress = Color(0, 1, 0, 1)
 
-[node name="RoundScore" type="MarginContainer" parent="CanvasLayer/UI" unique_id=1057937348]
+[node name="RoundScore" type="MarginContainer" parent="UI Canvas/UI" unique_id=1057937348]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -187,20 +166,45 @@ grow_vertical = 0
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UI/RoundScore" unique_id=386210555]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Canvas/UI/RoundScore" unique_id=386210555]
 layout_direction = 3
 layout_mode = 2
 alignment = 2
 
-[node name="Round" type="Label" parent="CanvasLayer/UI/RoundScore/VBoxContainer" unique_id=195826847]
+[node name="Round" type="Label" parent="UI Canvas/UI/RoundScore/VBoxContainer" unique_id=195826847]
 layout_mode = 2
 theme_override_font_sizes/font_size = 30
 text = "Round: "
 
-[node name="Score" type="Label" parent="CanvasLayer/UI/RoundScore/VBoxContainer" unique_id=1118834756]
+[node name="Score" type="Label" parent="UI Canvas/UI/RoundScore/VBoxContainer" unique_id=1118834756]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Score: "
+
+[node name="BG Canvas" type="CanvasLayer" parent="." unique_id=976736944]
+layer = -30
+
+[node name="ColorRect" type="ColorRect" parent="BG Canvas" unique_id=1070211585]
+visible = false
+offset_top = 4.0
+offset_right = 3120.0
+offset_bottom = 1706.0
+color = Color(0, 0, 0, 1)
+
+[node name="Player" parent="." unique_id=2057214509 node_paths=PackedStringArray("ui") instance=ExtResource("2_st4qh")]
+position = Vector2(1482, 901)
+platform_floor_layers = 4294901760
+ui = NodePath("../UI Canvas/UI")
+
+[node name="Path2D" type="Path2D" parent="Player" unique_id=2075246612]
+position = Vector2(-620, -158)
+curve = SubResource("Curve2D_st4qh")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Player/Path2D" unique_id=1428995615]
+unique_name_in_owner = true
+position = Vector2(296.9326, 1100.0106)
+rotation = 3.1266348
+progress = 7238.3647
 
 [node name="Timer" type="Timer" parent="." unique_id=1950464140]
 wait_time = 2.0
@@ -210,9 +214,6 @@ autostart = true
 autostart = true
 script = ExtResource("4_51e2l")
 
-[node name="Mob" parent="." unique_id=409378065 instance=ExtResource("5_oj4i3")]
-position = Vector2(1460, 700)
-
-[connection signal="round_change" from="." to="CanvasLayer/UI" method="_on_test_round_change"]
+[connection signal="round_change" from="." to="UI Canvas/UI" method="_on_test_round_change"]
 [connection signal="round_change" from="." to="SpawnTimer" method="_on_round_change"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
