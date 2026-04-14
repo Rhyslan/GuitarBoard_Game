@@ -21,8 +21,9 @@ signal game_over_signal()
 @export var max_slash_cooldown := 5.0
 @export var slash_cd_speed := 5.0
 @export_group("Dash")
-@export var max_dash_cooldown := 2
-@export var dash_speed_multiplier := 2
+@export var max_dash_cooldown := 2.0
+@export var dash_cd_speed := 5.0
+@export var dash_speed_multiplier := 2.0
 @export_group("Shield")
 @export var max_shield_amount := 100
 @export var shield_deplete_rate := 5
@@ -40,6 +41,8 @@ var selectedActions := {
 var is_reloading := false
 var is_beam_refilling := false
 var is_slash_cooldown := false
+var is_dashing := false
+var is_dash_cooldown := false
 
 @onready var bullets_remaining: float = max_bullet_count
 @onready var beam_remaining: float = max_beam_amount
@@ -50,6 +53,7 @@ var is_slash_cooldown := false
 @onready var attack_spawn := $AttackSpawn
 @onready var health := max_health
 @onready var slash_cooldown := max_slash_cooldown
+@onready var dash_cooldown := max_dash_cooldown
 
 
 func _ready() -> void:
@@ -80,8 +84,11 @@ func get_input(delta: float):
 	rotation += deg_to_rad(rot_vel * rot_speed)
 
 	# Movement
-	var input_dir = Input.get_vector("Left", "Right", "Up", "Down")
-	velocity = input_dir * speed
+	var input_dir := Input.get_vector("Left", "Right", "Up", "Down")
+	if is_dashing:
+		velocity = (input_dir * speed) * dash_speed_multiplier
+	else:
+		velocity = input_dir * speed
 	
 	# Actions
 	selectedActions["gun"] = Input.is_action_pressed("Gun")
@@ -197,7 +204,19 @@ func cooldown_slash(delta: float):
 
 
 func dash():
-	print("dashed")
+	if not is_dash_cooldown:
+		is_dashing = true
+		get_tree().create_timer(0.5).timeout.connect(func(): is_dashing = false)
+
+
+func cooldown_dash(delta: float):
+	if is_dash_cooldown:
+		if dash_cooldown > 0:
+			dash_cooldown -= dash_cd_speed * delta
+		
+		if dash_cooldown <= 0:
+			is_dash_cooldown = false
+			dash_cooldown = max_dash_cooldown
 
 
 func shield():
