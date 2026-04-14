@@ -4,7 +4,7 @@ class_name Beam extends ShapeCast2D
 
 @export var cast_speed := 7000.0
 @export var max_length := 1400.0
-@export var start_distance := 40.0
+@export var start_distance := 0.0
 @export var growth_time := 0.1
 @export var is_casting := false: set = set_is_casting
 

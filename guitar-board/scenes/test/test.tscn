@@ -258,7 +258,6 @@ color = Color(0, 0, 0, 1)
 position = Vector2(1482, 901)
 platform_floor_layers = 4294901760
 ui = NodePath("../UI Canvas/UI")
-max_health = 10.0
 
 [node name="Path2D" type="Path2D" parent="Player" unique_id=2075246612]
 position = Vector2(-620, -158)
@@ -280,7 +279,6 @@ script = ExtResource("4_51e2l")
 
 [node name="Mob" parent="." unique_id=409378065 instance=ExtResource("5_oj4i3")]
 position = Vector2(1388, 607)
-dmg_per_sec = 10.0
 
 [connection signal="round_change" from="." to="UI Canvas/UI" method="_on_test_round_change"]
 [connection signal="round_change" from="." to="SpawnTimer" method="_on_round_change"]

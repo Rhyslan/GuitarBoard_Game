@@ -12,12 +12,19 @@ signal game_over_signal()
 @export var rot_speed := 5.0
 
 @export_category("Actions")
+@export_group("Gun")
 @export var max_bullet_count := 25
+@export_group("Beam")
 @export var max_beam_amount := 100
-@export var beam_deplete_rate := 5
-@export var beam_refill_rate := 2
-@export var slash_cooldown := 5
-@export var dash_cooldown := 2
+@export var beam_deplete_rate := 20
+@export var beam_refill_rate := 5
+@export_group("Slash")
+@export var max_slash_cooldown := 5.0
+@export var slash_cd_speed := 5.0
+@export_group("Dash")
+@export var max_dash_cooldown := 2
+@export var dash_speed_multiplier := 2
+@export_group("Shield")
 @export var max_shield_amount := 100
 @export var shield_deplete_rate := 5
 @export var shield_refill_rate := 2
@@ -31,8 +38,8 @@ var selectedActions := {
 	"shield": false
 }
 
-var reloading := false
-var beam_state := "refil"
+var is_reloading := false
+var is_slash_cooldown := false
 
 @onready var bullets_remaining: float = max_bullet_count
 @onready var beam_remaining: float = max_beam_amount
@@ -42,6 +49,7 @@ var beam_state := "refil"
 @onready var slash := $Slash
 @onready var attack_spawn := $AttackSpawn
 @onready var health := max_health
+@onready var slash_cooldown := max_slash_cooldown
 
 
 func _ready() -> void:
@@ -49,16 +57,12 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	ui.update_display(round(health), round(bullets_remaining), beam_remaining, shield_remaining, slash_cooldown)
+	ui.update_display(round(health), round(bullets_remaining), beam_remaining, shield_remaining, round(slash_cooldown))
 	get_input(delta)
 	move_and_slide()
 	
-	if reloading:
-		if bullets_remaining < max_bullet_count:
-			bullets_remaining += 5 * delta
-		
-		if bullets_remaining >= max_bullet_count:
-			reloading = false
+	reload(delta)
+	cooldown_slash(delta)
 	
 	#everything the player hits
 	for i in get_slide_collision_count():
@@ -90,7 +94,7 @@ func get_input(delta: float):
 		jump()
 	
 	if Input.is_action_just_pressed("Reload"):
-		reloading = true
+		is_reloading = true
 	
 	if Input.is_action_just_pressed("Attack"):
 		if selectedActions["gun"]:
@@ -123,7 +127,7 @@ func jump():
 
 
 func shoot():
-	if bullets_remaining > 0 and not reloading:
+	if bullets_remaining > 0 and not is_reloading:
 		var b = bullet.instantiate()
 		self.get_parent().add_child(b)
 		b.transform = attack_spawn.global_transform
@@ -131,12 +135,21 @@ func shoot():
 		
 		if bullets_remaining < 0:
 			bullets_remaining = 0
-	elif reloading:
+	elif is_reloading:
 		# Put currently reloading warning here
 		print("currently reloading")
 	else:
 		# Put reload warning here
 		print("need to reload")
+
+
+func reload(delta: float):
+	if is_reloading:
+		if bullets_remaining < max_bullet_count:
+			bullets_remaining += 5 * delta
+		
+		if bullets_remaining >= max_bullet_count:
+			is_reloading = false
 
 
 func beam_deplete(delta: float):
@@ -156,7 +169,19 @@ func beam_refil(delta: float):
 
 
 func do_slash():
-	slash.attack()
+	if not is_slash_cooldown:
+		slash.attack()
+		is_slash_cooldown = true
+
+
+func cooldown_slash(delta: float):
+	if is_slash_cooldown:
+		if slash_cooldown > 0:
+			slash_cooldown -= slash_cd_speed * delta
+		
+		if slash_cooldown <= 0:
+			is_slash_cooldown = false
+			slash_cooldown = max_slash_cooldown
 
 
 func dash():
