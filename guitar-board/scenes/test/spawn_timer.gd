@@ -1,19 +1,18 @@
-extends Timer
+class_name SpawnTimer extends Timer
 
-var round
-# Called when the node enters the scene tree for the first time.
+@onready var round_num := 1
+
+
 func _ready():
-	round = 1
 	wait_time = 10
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+#func _process(_delta: float):
+#	pass
 
-func _on_round_change(new_round):
-	round = new_round
-	if (11 - round) >= 1:
-		wait_time = 11 - round
+func _on_round_change(new_round: int):
+	round_num = new_round
+	if (11 - round_num) >= 1:
+		wait_time = 11 - round_num
 	else:
 		wait_time = 0.5

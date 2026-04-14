@@ -1,4 +1,4 @@
-extends ShapeCast2D
+class_name Beam extends ShapeCast2D
 
 @export var dmg_per_sec := 1.0
 
