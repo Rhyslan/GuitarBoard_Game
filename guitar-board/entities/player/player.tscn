@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://bg6bi64miavng"]
 
 [ext_resource type="Script" uid="uid://bnueex7p0hhet" path="res://entities/player/player.gd" id="1_abrql"]
-[ext_resource type="PackedScene" uid="uid://bhmf7u255m5s6" path="res://entities/player/bullet.tscn" id="2_sglur"]
 [ext_resource type="Texture2D" uid="uid://c4112t0f88k5s" path="res://assets/player/Player.png" id="3_fkugw"]
 [ext_resource type="PackedScene" uid="uid://46e1880n55v4" path="res://entities/player/slash.tscn" id="4_fkugw"]
 [ext_resource type="PackedScene" uid="uid://dpydk6uympif0" path="res://entities/player/beam.tscn" id="5_8fjmc"]
@@ -11,7 +10,6 @@ radius = 74.168724
 
 [node name="Player" type="CharacterBody2D" unique_id=2057214509]
 script = ExtResource("1_abrql")
-Bullet = ExtResource("2_sglur")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1378449976]
 scale = Vector2(0.1, 0.1)

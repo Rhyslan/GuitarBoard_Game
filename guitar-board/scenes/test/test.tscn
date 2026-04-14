@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bg6bi64miavng" path="res://entities/player/player.tscn" id="2_st4qh"]
 [ext_resource type="Script" uid="uid://bhyhscjyq2jpa" path="res://scenes/test/ui.gd" id="3_st4qh"]
 [ext_resource type="Script" uid="uid://cmh6c1tpt43tt" path="res://scenes/test/spawn_timer.gd" id="4_51e2l"]
+[ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="5_oj4i3"]
 
 [sub_resource type="Gradient" id="Gradient_51e2l"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
@@ -86,14 +87,6 @@ offset_right = -554.0
 offset_bottom = -393.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Health" type="Label" parent="UI Canvas/UI" unique_id=419913043]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 102.0
-offset_right = 51.0
-offset_bottom = 125.0
-text = "Health"
 
 [node name="Resources" type="MarginContainer" parent="UI Canvas/UI" unique_id=591660455]
 layout_mode = 1
@@ -181,6 +174,76 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Score: "
 
+[node name="PauseMenu" type="CenterContainer" parent="UI Canvas/UI" unique_id=1850675293]
+process_mode = 2
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Canvas/UI/PauseMenu" unique_id=2124446116]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Label" type="Label" parent="UI Canvas/UI/PauseMenu/VBoxContainer" unique_id=1133919830]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "PAUSED"
+horizontal_alignment = 1
+
+[node name="UnPauseButton" type="Button" parent="UI Canvas/UI/PauseMenu/VBoxContainer" unique_id=1641398506]
+layout_mode = 2
+text = "Continue"
+
+[node name="TitleButton" type="Button" parent="UI Canvas/UI/PauseMenu/VBoxContainer" unique_id=537978912]
+layout_mode = 2
+text = "Return to title"
+
+[node name="GameOverMenu" type="CenterContainer" parent="UI Canvas/UI" unique_id=610152947]
+process_mode = 2
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Canvas/UI/GameOverMenu" unique_id=1872646248]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Label" type="Label" parent="UI Canvas/UI/GameOverMenu/VBoxContainer" unique_id=313329634]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "GAME OVER"
+horizontal_alignment = 1
+
+[node name="RetryButton" type="Button" parent="UI Canvas/UI/GameOverMenu/VBoxContainer" unique_id=1772769830]
+layout_mode = 2
+text = "Retry"
+
+[node name="TitleButton" type="Button" parent="UI Canvas/UI/GameOverMenu/VBoxContainer" unique_id=1894923846]
+layout_mode = 2
+text = "Return to title"
+
 [node name="BG Canvas" type="CanvasLayer" parent="." unique_id=976736944]
 layer = -30
 
@@ -195,6 +258,7 @@ color = Color(0, 0, 0, 1)
 position = Vector2(1482, 901)
 platform_floor_layers = 4294901760
 ui = NodePath("../UI Canvas/UI")
+max_health = 10.0
 
 [node name="Path2D" type="Path2D" parent="Player" unique_id=2075246612]
 position = Vector2(-620, -158)
@@ -214,6 +278,12 @@ autostart = true
 autostart = true
 script = ExtResource("4_51e2l")
 
+[node name="Mob" parent="." unique_id=409378065 instance=ExtResource("5_oj4i3")]
+position = Vector2(1388, 607)
+dmg_per_sec = 10.0
+
 [connection signal="round_change" from="." to="UI Canvas/UI" method="_on_test_round_change"]
 [connection signal="round_change" from="." to="SpawnTimer" method="_on_round_change"]
+[connection signal="game_over_signal" from="Player" to="UI Canvas/UI" method="_on_player_game_over_signal"]
+[connection signal="pause_pressed" from="Player" to="UI Canvas/UI" method="_on_player_pause_pressed"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]

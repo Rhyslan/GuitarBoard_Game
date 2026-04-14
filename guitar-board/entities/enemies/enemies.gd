@@ -9,7 +9,7 @@ class_name Mob extends CharacterBody2D
 
 
 #follows player position
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * 300.0
 	move_and_slide()
