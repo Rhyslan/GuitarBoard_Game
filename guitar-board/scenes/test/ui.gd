@@ -4,8 +4,10 @@ class_name GameUI extends Control
 @onready var health_bar: TextureProgressBar = $Resources/VBoxContainer/HealthBar
 @onready var ammo_count: Label = $Resources/VBoxContainer/HBoxGunSlash/Ammo
 @onready var beam_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/BeamBar
-@onready var slash_cd: Label = $Resources/VBoxContainer/HBoxGunSlash/SlashCD
+@onready var beam_colour: Color = beam_bar.tint_progress
+@onready var slash_bar: Label = $Resources/VBoxContainer/HBoxGunSlash/SlashCD
 @onready var shield_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/ShieldBar
+@onready var shield_colour: Color = shield_bar.tint_progress
 
 # Round and Score variables
 @onready var round_tracker: Label = $RoundScore/VBoxContainer/Round
@@ -41,18 +43,38 @@ func _ready():
 #	pass
 
 
-func set_max_values(health: float, beam: float, shield: float):
+func set_max_values(health: float, bullets:float, beam: float, slash: float, dash:float, shield: float):
 	health_bar.max_value = health
+	#bullets_bar.max_value = bullets
 	beam_bar.max_value = beam
+	#slash_bar.max_value = slash
+	#dash_bar.max_value = dash
 	shield_bar.max_value = shield
 
 
-func update_display(health: float, bullet_count: int, beam_value: float, shield_value: float, slash_val: int):
+func update_display(
+	health: float, 
+	bullet_count: int, 
+	beam_value: float, 
+	beam_full_refil: bool, 
+	slash_val: float, 
+	dash_val: float, 
+	shield_value: float,
+	shield_full_refil: bool
+):
 	health_bar.value = health
 	ammo_count.text = "Ammo: %s" % str(bullet_count)
 	beam_bar.value = beam_value
+	if beam_full_refil:
+		beam_bar.tint_progress = Color(beam_colour, 0.502)
+	else:
+		beam_bar.tint_progress = beam_colour
+	slash_bar.text = "Slash CD: %s" % str(slash_val)
 	shield_bar.value = shield_value
-	slash_cd.text = "Slash CD: %s" % str(slash_val)
+	if shield_full_refil:
+		shield_bar.tint_progress = Color(shield_colour, 0.502)
+	else:
+		shield_bar.tint_progress = shield_colour
 
 
 func _on_test_round_change(new_round: int):

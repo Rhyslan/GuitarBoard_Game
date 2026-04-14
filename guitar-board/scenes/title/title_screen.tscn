@@ -20,7 +20,9 @@ layout_mode = 2
 
 [node name="Title" type="TextureRect" parent="VBoxContainer" unique_id=1468096922]
 layout_mode = 2
+size_flags_horizontal = 4
 texture = ExtResource("1_05wk3")
+stretch_mode = 4
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1071177136]
 layout_mode = 2
