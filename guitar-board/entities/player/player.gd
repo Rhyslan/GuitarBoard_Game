@@ -170,8 +170,6 @@ func shield():
 func get_hit(health_lost: float):
 	health -= health_lost
 	
-	print(health)
-	
 	if health <= 0:
 		game_over()
 		
