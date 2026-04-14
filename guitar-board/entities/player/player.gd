@@ -57,11 +57,19 @@ var is_dash_cooldown := false
 
 
 func _ready() -> void:
-	ui.set_max_values(max_health, max_shield_amount, max_beam_amount)
+	ui.set_max_values(max_health, max_bullet_count, max_beam_amount, max_slash_cooldown, max_dash_cooldown, max_shield_amount)
 
 
 func _physics_process(delta: float) -> void:
-	ui.update_display(round(health), round(bullets_remaining), beam_remaining, is_beam_refilling, shield_remaining, round(slash_cooldown))
+	ui.update_display(
+		round(health),
+		round(bullets_remaining), 
+		beam_remaining, 
+		is_beam_refilling, 
+		slash_cooldown,
+		dash_cooldown,
+		shield_remaining
+	)
 	get_input(delta)
 	move_and_slide()
 	
