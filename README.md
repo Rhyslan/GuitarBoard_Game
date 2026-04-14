@@ -6,11 +6,11 @@
 # Inputs
 | Action | Keyboard | Controller |
 | --- | :---: | :---: |
-| Move Up | ``W`` | N/A |
-| Move Down | ``S`` | N/A |
-| Move Left | ``A`` | N/A |
-| Move Right | ``D`` | N/A |
-| Jump | ``Space`` | N/A |
+| Move Up | ``W`` | Balance Board Lean Forward |
+| Move Down | ``S`` | Balance Board Lean Backward |
+| Move Left | ``A`` | Balance Board Lean Left |
+| Move Right | ``D`` | Balance Board Lean Right |
+| Jump | ``Space`` | Balance Board Jump/Lift Feet |
 | Select Gun | ``1`` | ``Green`` |
 | Select Beam | ``2`` | ``Red`` |
 | Select Slash | ``3`` | ``Yellow`` |
