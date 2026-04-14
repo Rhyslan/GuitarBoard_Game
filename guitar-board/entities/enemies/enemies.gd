@@ -5,6 +5,8 @@ class_name Mob extends CharacterBody2D
 @export var health := 2.0
 @export var dmg_per_sec := 1.0
 
+var knockback_vel := Vector2.ZERO
+
 @onready var player := get_node("/root/Test/Player")
 
 
@@ -12,6 +14,8 @@ class_name Mob extends CharacterBody2D
 func _physics_process(_delta: float):
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * 300.0
+	velocity += knockback_vel
+	
 	move_and_slide()
 	
 	#enemy collision
@@ -28,3 +32,10 @@ func take_damage(damage_taken: float):
 	if health <= 0.0:
 		queue_free()
 	# death animation down here (add as child) and play on global pos
+
+
+func apply_knockback(force: Vector2):
+	knockback_vel = force
+
+func remove_knockback():
+	knockback_vel = Vector2.ZERO

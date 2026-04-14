@@ -4,9 +4,10 @@ class_name GameUI extends Control
 @onready var health_bar: TextureProgressBar = $Resources/VBoxContainer/HealthBar
 @onready var ammo_count: Label = $Resources/VBoxContainer/HBoxGunSlash/Ammo
 @onready var beam_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/BeamBar
-@onready var beam_col: Color = beam_bar.tint_progress
+@onready var beam_colour: Color = beam_bar.tint_progress
 @onready var slash_bar: Label = $Resources/VBoxContainer/HBoxGunSlash/SlashCD
 @onready var shield_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/ShieldBar
+@onready var shield_colour: Color = shield_bar.tint_progress
 
 # Round and Score variables
 @onready var round_tracker: Label = $RoundScore/VBoxContainer/Round
@@ -58,17 +59,22 @@ func update_display(
 	beam_full_refil: bool, 
 	slash_val: float, 
 	dash_val: float, 
-	shield_value: float
+	shield_value: float,
+	shield_full_refil: bool
 ):
 	health_bar.value = health
 	ammo_count.text = "Ammo: %s" % str(bullet_count)
 	beam_bar.value = beam_value
 	if beam_full_refil:
-		beam_bar.tint_progress = Color(beam_col, 0.502)
+		beam_bar.tint_progress = Color(beam_colour, 0.502)
 	else:
-		beam_bar.tint_progress = beam_col
-	shield_bar.value = shield_value
+		beam_bar.tint_progress = beam_colour
 	slash_bar.text = "Slash CD: %s" % str(slash_val)
+	shield_bar.value = shield_value
+	if shield_full_refil:
+		shield_bar.tint_progress = Color(shield_colour, 0.502)
+	else:
+		shield_bar.tint_progress = shield_colour
 
 
 func _on_test_round_change(new_round: int):
