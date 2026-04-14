@@ -48,7 +48,15 @@ func set_max_values(health: float, beam: float, shield: float):
 	shield_bar.max_value = shield
 
 
-func update_display(health: float, bullet_count: int, beam_value: float, beam_full_refil: bool, shield_value: float, slash_val: int):
+func update_display(
+	health: float, 
+	bullet_count: int, 
+	beam_value: float, 
+	beam_full_refil: bool, 
+	slash_val: int, 
+	#dash_val: float, 
+	shield_value: float
+):
 	health_bar.value = health
 	ammo_count.text = "Ammo: %s" % str(bullet_count)
 	beam_bar.value = beam_value
