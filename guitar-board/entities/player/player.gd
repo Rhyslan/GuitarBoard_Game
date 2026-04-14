@@ -38,6 +38,7 @@ var selectedActions := {
 }
 
 var is_reloading := false
+var is_beam_refilling := false
 var is_slash_cooldown := false
 
 @onready var bullets_remaining: float = max_bullet_count
@@ -56,7 +57,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	ui.update_display(round(health), round(bullets_remaining), beam_remaining, shield_remaining, round(slash_cooldown))
+	ui.update_display(round(health), round(bullets_remaining), beam_remaining, is_beam_refilling, shield_remaining, round(slash_cooldown))
 	get_input(delta)
 	move_and_slide()
 	
@@ -105,17 +106,17 @@ func get_input(delta: float):
 	
 	if Input.is_action_pressed("Attack"):
 		if selectedActions["beam"]:
-			beam.set_is_casting(true)
-			beam_deplete(delta)
+			if not is_beam_refilling:
+				beam_on(delta)
+			else:
+				beam_off(delta)
 		else:
-			beam.set_is_casting(false)
-			beam_refil(delta)
+			beam_off(delta)
 		
 		if selectedActions["shield"]:
 			shield()
 	else:
-		beam.set_is_casting(false)
-		beam_refil(delta)
+		beam_off(delta)
 	
 	# Pause
 	if Input.is_action_just_pressed("Pause"):
@@ -151,12 +152,23 @@ func reload(delta: float):
 			is_reloading = false
 
 
+func beam_on(delta: float):
+	beam.set_is_casting(true)
+	beam_deplete(delta)
+
+
+func beam_off(delta: float):
+	beam.set_is_casting(false)
+	beam_refil(delta)
+
+
 func beam_deplete(delta: float):
 	if beam_remaining > 0.0 and beam.is_casting:
 		beam_remaining -= beam_deplete_rate * delta
 		
 		if beam_remaining < 0.0:
 			beam_remaining = 0.0
+			is_beam_refilling = true
 
 
 func beam_refil(delta: float):
@@ -165,6 +177,7 @@ func beam_refil(delta: float):
 		
 		if beam_remaining > max_beam_amount:
 			beam_remaining = max_beam_amount
+			is_beam_refilling = false
 
 
 func do_slash():
@@ -195,11 +208,4 @@ func get_hit(health_lost: float):
 	health -= health_lost
 	
 	if health <= 0:
-		game_over()
-		
-
-
-#game over (temp)
-func game_over():
-	health = 0
-	game_over_signal.emit()
+		game_over_signal.emit()

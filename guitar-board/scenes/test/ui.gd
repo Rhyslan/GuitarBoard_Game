@@ -4,6 +4,7 @@ class_name GameUI extends Control
 @onready var health_bar: TextureProgressBar = $Resources/VBoxContainer/HealthBar
 @onready var ammo_count: Label = $Resources/VBoxContainer/HBoxGunSlash/Ammo
 @onready var beam_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/BeamBar
+@onready var beam_col: Color = beam_bar.tint_progress
 @onready var slash_cd: Label = $Resources/VBoxContainer/HBoxGunSlash/SlashCD
 @onready var shield_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/ShieldBar
 
@@ -47,10 +48,14 @@ func set_max_values(health: float, beam: float, shield: float):
 	shield_bar.max_value = shield
 
 
-func update_display(health: float, bullet_count: int, beam_value: float, shield_value: float, slash_val: int):
+func update_display(health: float, bullet_count: int, beam_value: float, beam_full_refil: bool, shield_value: float, slash_val: int):
 	health_bar.value = health
 	ammo_count.text = "Ammo: %s" % str(bullet_count)
 	beam_bar.value = beam_value
+	if beam_full_refil:
+		beam_bar.tint_progress = Color(beam_col, 0.502)
+	else:
+		beam_bar.tint_progress = beam_col
 	shield_bar.value = shield_value
 	slash_cd.text = "Slash CD: %s" % str(slash_val)
 
