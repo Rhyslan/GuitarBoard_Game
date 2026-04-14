@@ -2,11 +2,11 @@ extends Node2D
 
 signal round_change(new_round)
 
-var input_list = "Actions pressed:\n"
+var input_list := "Actions pressed:\n"
 var mob := preload("res://entities/enemies/mob.tscn")
 
-@onready var round := 1
-@onready var round_timer := 0
+@onready var round_num := 1
+@onready var round_timer := 0.0
 @onready var player = get_node("/root/Test/Player")
 
 
@@ -39,15 +39,19 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("Reload"):
 		input_list += "Reloading\n"
 	
+	# Pausing
+	if Input.is_action_just_pressed("Pause"):
+		input_list += "Game Paused\n"
+	
 	$"UI Canvas/UI/Label".text = input_list
 	#$CanvasLayer/UI/Health.text = "Health: " + str(player.health)
 	
-	# Round timer updates, after 60 seconds round updates
+	# Round timer updates, after 30 seconds round updates
 	round_timer += delta
 	if round_timer >= 30:
 		round_timer = 0
-		round += 1
-		round_change.emit(round)
+		round_num += 1
+		round_change.emit(round_num)
 	
 	# spawn path follows the player
 	# spawning always out of view

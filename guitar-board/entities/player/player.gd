@@ -1,6 +1,9 @@
 class_name Player extends CharacterBody2D
 
 
+signal pause_pressed()
+signal game_over_signal()
+
 @export var ui: GameUI
 @export var max_health := 100.0
 
@@ -20,7 +23,6 @@ class_name Player extends CharacterBody2D
 @export var shield_refill_rate := 2
 
 var rot_vel := 0.0
-var health := max_health
 var selectedActions := {
 	"gun": false, 
 	"beam": false, 
@@ -39,6 +41,7 @@ var beam_state := "refil"
 @onready var beam := $Beam
 @onready var slash := $Slash
 @onready var attack_spawn := $AttackSpawn
+@onready var health := max_health
 
 
 func _ready() -> void:
@@ -46,7 +49,7 @@ func _ready() -> void:
 
 
 func _physics_process(delta: float) -> void:
-	ui.update_display(health, round(bullets_remaining), beam_remaining, shield_remaining, slash_cooldown)
+	ui.update_display(round(health), round(bullets_remaining), beam_remaining, shield_remaining, slash_cooldown)
 	get_input(delta)
 	move_and_slide()
 	
@@ -110,6 +113,10 @@ func get_input(delta: float):
 	else:
 		beam.set_is_casting(false)
 		beam_refil(delta)
+	
+	# Pause
+	if Input.is_action_just_pressed("Pause"):
+		pause_pressed.emit()
 
 func jump():
 	print("jumped")
@@ -160,8 +167,10 @@ func shield():
 	print("holding shield")
 
 
-func get_hit(health_lost):
-	health-=health_lost
+func get_hit(health_lost: float):
+	health -= health_lost
+	
+	print(health)
 	
 	if health <= 0:
 		game_over()
@@ -171,4 +180,4 @@ func get_hit(health_lost):
 #game over (temp)
 func game_over():
 	health = 0
-	print("Game Over!")
+	game_over_signal.emit()
