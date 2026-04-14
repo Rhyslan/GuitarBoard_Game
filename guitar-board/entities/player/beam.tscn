@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpydk6uympif0"]
 
 [ext_resource type="Script" uid="uid://dy76fbmv72act" path="res://entities/player/beam.gd" id="1_7u0ro"]
-[ext_resource type="Texture2D" uid="uid://b3gnxabljblmq" path="res://assets/attacks/beam.png" id="2_idiqm"]
+[ext_resource type="Texture2D" uid="uid://jv7a3pd1clyc" path="res://assets/player/actions/beam.png" id="2_idiqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_idiqm"]
 size = Vector2(80, 80)

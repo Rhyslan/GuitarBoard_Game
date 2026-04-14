@@ -1,7 +1,5 @@
 extends CharacterBody2D
 
-signal pause_pressed()
-signal game_over_signal()
 
 @export var Bullet : PackedScene
 
@@ -67,10 +65,6 @@ func get_input():
 			shield()
 	else:
 		$Beam.set_is_casting(false)
-		
-	# Pause
-	if Input.is_action_pressed("Pause"):
-		pause_pressed.emit()
 
 func jump():
 	print("jumped")
@@ -98,6 +92,8 @@ func shield():
 func reload():
 	print("Starting reload")
 
+
+
 func get_hit(health_lost):
 	health-=health_lost
 	
@@ -105,11 +101,12 @@ func get_hit(health_lost):
 		game_over()
 		
 
-# Sends Game Over signal, which UI uses to pause game and bring up GameOverMenu
+
+#game over (temp)
 func game_over():
 	health = 0
-	game_over_signal.emit()
-	
+	print("Game Over!")
+
 
 func _physics_process(delta: float) -> void:
 	get_input()

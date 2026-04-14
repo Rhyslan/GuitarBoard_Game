@@ -41,14 +41,11 @@ func _process(delta: float) -> void:
 		input_list += "Activating selection\n"
 	if Input.is_action_pressed("Reload"):
 		input_list += "Reloading\n"
-	# Pausing
-	if Input.is_action_pressed("Pause"):
-		input_list += "Game paused\n"
 	
 	$CanvasLayer/UI/Label.text = input_list
 	$CanvasLayer/UI/Health.text = "Health: " + str(player.health)
 	
-	# Round timer updates, after 30 seconds round updates
+	# Round timer updates, after 60 seconds round updates
 	round_timer += delta
 	if round_timer >= 30:
 		round_timer = 0
