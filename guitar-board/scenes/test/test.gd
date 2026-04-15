@@ -20,13 +20,16 @@ func _process(delta: float) -> void:
 	# spawn path follows the player
 	# spawning always out of view
 	# random spawning anywhere on path2d rectangle
-
+#mob blueprints
+@export var RangedMob: PackedScene
 
 func spawn_mob():
 	var new_mob = mob.instantiate()
+	var new_rangedmob = RangedMob.instantiate()
 	%PathFollow2D.progress_ratio = randf()
 	new_mob.global_position = %PathFollow2D.global_position
 	add_child(new_mob)
+	add_child(new_rangedmob)
 	
 	#connected spawner to timer
 	#change wait time in inspector for timer to increase or decrease rate

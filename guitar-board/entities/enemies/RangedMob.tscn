@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://cssvipewgnaki"]
+
+[ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="1_2i5lt"]
+[ext_resource type="Script" path="res://entities/enemies/ranged_mob.gd" id="2_u4pwx"]
+[ext_resource type="PackedScene" uid="uid://baafp1syp61na" path="res://entities/enemies/enemyprojectile.tscn" id="3_elx1h"]
+
+[node name="RangedMob" unique_id=409378065 instance=ExtResource("1_2i5lt")]
+script = ExtResource("2_u4pwx")
+attack_range = 400.0
+stop_range = 350.0
+fire_rate = 2
+enemyprojectile_scene = ExtResource("3_elx1h")
+dmg_per_sec = 1.0

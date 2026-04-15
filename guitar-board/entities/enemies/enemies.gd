@@ -14,7 +14,7 @@ var knockback_vel := Vector2.ZERO
 
 
 #follows player position
-func _physics_process(_delta: float):
+func _physics_process(delta: float):
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * 300.0
 	velocity += knockback_vel
@@ -22,9 +22,11 @@ func _physics_process(_delta: float):
 	move_and_slide()
 	
 	#enemy collision
-	#for i in get_slide_collision_count():
-	#	var collision = get_slide_collision(i)
-	#	var collider = collision.get_collider()
+	##for i in get_slide_collision_count():
+		##var collision = get_slide_collision(i)
+		##var collider = collision.get_collider()
+		##if collider is Player:
+			##collider.get_hit(dmg_per_sec * delta)
 
 
 # Deletes mob when hp = 0
