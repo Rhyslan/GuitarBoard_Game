@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ch6mhsl4nbe4e" path="res://scenes/test/test.gd" id="1_da6vm"]
 [ext_resource type="PackedScene" uid="uid://bg6bi64miavng" path="res://entities/player/player.tscn" id="2_st4qh"]
-[ext_resource type="PackedScene" uid="uid://cssvipewgnaki" path="res://entities/enemies/RangedMob.tscn" id="2_we7ej"]
+[ext_resource type="PackedScene" uid="uid://cssvipewgnaki" path="res://entities/enemies/ranged_mob.tscn" id="2_we7ej"]
 [ext_resource type="Texture2D" uid="uid://csf0vja8c25c7" path="res://assets/map/Tile1.png" id="3_k6n02"]
 [ext_resource type="Script" uid="uid://bhyhscjyq2jpa" path="res://scenes/test/ui.gd" id="3_st4qh"]
 [ext_resource type="Texture2D" uid="uid://duq32ecg4a3i3" path="res://assets/ui/BarBack.png" id="4_2ns80"]
@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="5_oj4i3"]
 [ext_resource type="Texture2D" uid="uid://c041sbtryml1a" path="res://assets/ui/HealthBack.png" id="6_saoeg"]
 [ext_resource type="Texture2D" uid="uid://dyl6nv8lyq2i4" path="res://assets/ui/HealthProgress.png" id="7_we7ej"]
-[ext_resource type="PackedScene" uid="uid://baafp1syp61na" path="res://entities/enemies/enemyprojectile.tscn" id="12_xi5sv"]
+[ext_resource type="PackedScene" uid="uid://bp20vplt8coop" path="res://entities/enemies/tank_mob.tscn" id="13_2dgve"]
 
 [sub_resource type="Curve2D" id="Curve2D_st4qh"]
 _data = {
@@ -22,6 +22,7 @@ point_count = 11
 [node name="Test" type="Node2D" unique_id=1115389140]
 script = ExtResource("1_da6vm")
 RangedMob = ExtResource("2_we7ej")
+TankMob = ExtResource("13_2dgve")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=539078965]
 position = Vector2(2289.5, 1898.5)
@@ -285,8 +286,6 @@ layer = -30
 
 [node name="Player" parent="." unique_id=2057214509 node_paths=PackedStringArray("ui") instance=ExtResource("2_st4qh")]
 position = Vector2(1482, 901)
-collision_layer = 7
-collision_mask = 7
 platform_floor_layers = 4294901767
 platform_wall_layers = 7
 ui = NodePath("../UI Canvas/UI")
@@ -310,15 +309,7 @@ autostart = true
 script = ExtResource("4_51e2l")
 
 [node name="Mob" parent="." unique_id=409378065 instance=ExtResource("5_oj4i3")]
-position = Vector2(1388, 607)
-collision_layer = 2
-collision_mask = 2
-
-[node name="RangedMob" parent="." unique_id=1790917556 instance=ExtResource("2_we7ej")]
-collision_layer = 2
-collision_mask = 2
-
-[node name="Projectile" parent="." unique_id=873994230 instance=ExtResource("12_xi5sv")]
+position = Vector2(1505, 360)
 
 [connection signal="round_change" from="." to="UI Canvas/UI" method="_on_test_round_change"]
 [connection signal="round_change" from="." to="SpawnTimer" method="_on_round_change"]

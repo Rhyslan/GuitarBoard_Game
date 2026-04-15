@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	# random spawning anywhere on path2d rectangle
 #mob blueprints
 @export var RangedMob: PackedScene
-
+@export var TankMob: PackedScene
 func spawn_mob():
 	var new_mob = mob.instantiate()
 	var new_rangedmob = RangedMob.instantiate()
@@ -30,6 +30,14 @@ func spawn_mob():
 	new_mob.global_position = %PathFollow2D.global_position
 	add_child(new_mob)
 	add_child(new_rangedmob)
+	#Only one tank mob at at time
+	if get_tree().get_node_count_in_group("tanks") == 0:
+		var new_tankmob = TankMob.instantiate()
+		new_tankmob.add_to_group("tanks")
+		
+		%PathFollow2D.progress_ratio = randf()
+		new_tankmob.global_position = %PathFollow2D.global_position
+		add_child(new_tankmob)
 	
 	#connected spawner to timer
 	#change wait time in inspector for timer to increase or decrease rate

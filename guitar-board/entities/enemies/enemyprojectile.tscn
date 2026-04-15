@@ -1,25 +1,25 @@
 [gd_scene format=3 uid="uid://baafp1syp61na"]
 
 [ext_resource type="Script" uid="uid://cnrsc1pk48hed" path="res://entities/enemies/enemyprojectile.gd" id="1_ffqjl"]
-[ext_resource type="Texture2D" uid="uid://rr48l62p684p" path="res://assets/player/actions/Shield.png" id="1_v8wmu"]
+[ext_resource type="Texture2D" uid="uid://dhwkakpxpqmpi" path="res://assets/enemies/vampire_projectile.png" id="2_ffqjl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ffqjl"]
-radius = 10.9375105
+radius = 12.305664
 
 [node name="Projectile" type="Area2D" unique_id=873994230]
-scale = Vector2(0.23888037, 0.28103784)
+scale = Vector2(0.8576708, 0.7197204)
 collision_layer = 4
 collision_mask = 4
 script = ExtResource("1_ffqjl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2073810947]
-position = Vector2(1, -18)
-scale = Vector2(0.020068053, 0.016964285)
-texture = ExtResource("1_v8wmu")
+rotation = 1.5707964
+scale = Vector2(0.1926985, 0.17543964)
+texture = ExtResource("2_ffqjl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2051662846]
-position = Vector2(1, -19)
-scale = Vector2(1.9199982, 1.7200011)
+rotation = 1.5707964
+scale = Vector2(2.5281913, 3.0847285)
 shape = SubResource("CircleShape2D_ffqjl")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

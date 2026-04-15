@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://cssvipewgnaki"]
+
+[ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="1_2i5lt"]
+[ext_resource type="Script" uid="uid://c7ei7reyxsxfr" path="res://entities/enemies/ranged_mob.gd" id="2_u4pwx"]
+[ext_resource type="PackedScene" uid="uid://baafp1syp61na" path="res://entities/enemies/enemyprojectile.tscn" id="3_elx1h"]
+[ext_resource type="Texture2D" uid="uid://b6d2vawevfhgs" path="res://assets/enemies/vampire_range.png" id="4_2nu7c"]
+
+[node name="RangedMob" unique_id=409378065 instance=ExtResource("1_2i5lt")]
+position = Vector2(-5.9604645e-08, 0)
+scale = Vector2(0.8509059, 0.7599666)
+script = ExtResource("2_u4pwx")
+attack_range = 450.0
+stop_range = 400.0
+fire_rate = 2
+enemyprojectile_scene = ExtResource("3_elx1h")
+dmg_per_sec = 1.0
+speed = 150.0
+
+[node name="Sprite2D" parent="." index="0" unique_id=419129148]
+position = Vector2(1.4952537, -19.811928)
+scale = Vector2(0.19140956, 0.18239434)
+texture = ExtResource("4_2nu7c")
