@@ -10,4 +10,4 @@ func _physics_process(delta: float) -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("mobs"):
 		body.take_damage(1)
-	queue_free()
+		queue_free()

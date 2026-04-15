@@ -101,7 +101,8 @@ func update_display(
 
 
 func update_score(new_score: int):
-	score_tracker.text = "Score: %s" % str(score + new_score)
+	score += new_score
+	score_tracker.text = "Score: %s" % str(score)
 
 
 func _on_test_round_change(new_round: int):
