@@ -4,10 +4,13 @@ class_name Mob extends CharacterBody2D
 
 @export var health := 2.0
 @export var dmg_per_sec := 1.0
+@export var point_value := 1
 
 var knockback_vel := Vector2.ZERO
 
-@onready var player := get_node("/root/Test/Player")
+@onready var player: Player = get_node("/root/Test/Player")
+@onready var ui: GameUI = get_node("/root/Test/UI Canvas/UI")
+
 
 
 #follows player position
@@ -31,6 +34,7 @@ func take_damage(damage_taken: float):
 	
 	if health <= 0.0:
 		queue_free()
+		ui.update_score(point_value)
 	# death animation down here (add as child) and play on global pos
 
 

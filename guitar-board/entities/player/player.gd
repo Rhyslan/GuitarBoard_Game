@@ -69,8 +69,8 @@ func _physics_process(delta: float) -> void:
 		round(bullets_remaining), 
 		beam_remaining, 
 		is_beam_refilling, 
-		slash_cooldown,
-		dash_cooldown,
+		round(slash_cooldown),
+		round(dash_cooldown),
 		shield_remaining,
 		is_shield_refilling
 	)
