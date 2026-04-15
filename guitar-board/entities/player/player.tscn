@@ -12,11 +12,12 @@
 radius = 74.168724
 
 [node name="Player" type="CharacterBody2D" unique_id=2057214509]
-collision_layer = 7
-collision_mask = 7
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_abrql")
 
 [node name="DashEffect" type="Sprite2D" parent="." unique_id=1069321593]
+visible = false
 position = Vector2(-1.6940659e-21, 5.9604645e-08)
 scale = Vector2(0.33, 0.33)
 texture = ExtResource("2_qiwj3")
@@ -49,4 +50,4 @@ collision_mask = 2
 dmg_per_sec = 10.0
 
 [node name="Shield" parent="." unique_id=965134808 instance=ExtResource("6_8fjmc")]
-visible = false
+scale = Vector2(1.5, 1.5)

@@ -8,8 +8,8 @@ radius = 12.305664
 
 [node name="Projectile" type="Area2D" unique_id=873994230]
 scale = Vector2(0.8576708, 0.7197204)
-collision_layer = 4
-collision_mask = 4
+collision_layer = 3
+collision_mask = 3
 script = ExtResource("1_ffqjl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2073810947]

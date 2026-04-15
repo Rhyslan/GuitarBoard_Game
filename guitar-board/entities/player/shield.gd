@@ -1,10 +1,21 @@
 class_name Shield extends StaticBody2D
 
-@onready var collision_shape := $CollisionShape2D
+@export var max_radius := 1.5
 var is_active := false
+
+@onready var collision_shape := $CollisionShape2D
+
 
 func _ready() -> void:
 	collision_shape.disabled = true
+
+
+func _physics_process(delta: float) -> void:
+	if is_active:
+		if scale.x < max_radius:
+			scale += Vector2.ONE * 10 * delta
+	else:
+		scale = Vector2.ZERO
 
 
 func activate():
