@@ -3,17 +3,18 @@ class_name GameUI extends Control
 var score := 0
 
 # Resource variables
-@onready var health_bar: TextureProgressBar = $Resources/VBoxContainer/HealthBar
-@onready var ammo_count: Label = $Resources/VBoxContainer/HBoxGunSlash/Ammo
-@onready var beam_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/BeamBar
+@onready var health_bar: TextureProgressBar = $HealthContainer/HealthBar
+@onready var gun_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Gun
+@onready var beam_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Beam
 @onready var beam_colour: Color = beam_bar.tint_progress
-@onready var slash_bar: Label = $Resources/VBoxContainer/HBoxGunSlash/SlashCD
-@onready var shield_bar: TextureProgressBar = $Resources/VBoxContainer/HBoxBeamShield/ShieldBar
+@onready var slash_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Slash
+@onready var dash_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Dash
+@onready var shield_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Shield
 @onready var shield_colour: Color = shield_bar.tint_progress
 
 # Round and Score variables
-@onready var round_tracker: Label = $RoundScore/VBoxContainer/Round
-@onready var score_tracker: Label = $RoundScore/VBoxContainer/Score
+@onready var round_tracker: Label = $RoundScoreContainer/HBoxContainer/Round
+@onready var score_tracker: Label = $RoundScoreContainer/HBoxContainer/Score
 
 # Pause Menu
 @onready var pause_menu: CenterContainer = $PauseMenu
@@ -43,10 +44,10 @@ func _ready():
 
 func set_max_values(health: float, bullets:float, beam: float, slash: float, dash:float, shield: float):
 	health_bar.max_value = health
-	#bullets_bar.max_value = bullets
+	gun_bar.max_value = bullets
 	beam_bar.max_value = beam
-	#slash_bar.max_value = slash
-	#dash_bar.max_value = dash
+	slash_bar.max_value = slash
+	dash_bar.max_value = dash
 	shield_bar.max_value = shield
 
 
@@ -61,13 +62,13 @@ func update_display(
 	shield_full_refil: bool
 ):
 	health_bar.value = health
-	ammo_count.text = "Ammo: %s" % str(bullet_count)
+	gun_bar.value = bullet_count
 	beam_bar.value = beam_value
 	if beam_full_refil:
 		beam_bar.tint_progress = Color(beam_colour, 0.502)
 	else:
 		beam_bar.tint_progress = beam_colour
-	slash_bar.text = "Slash CD: %s" % str(slash_val)
+	slash_bar.value = slash_val
 	shield_bar.value = shield_value
 	if shield_full_refil:
 		shield_bar.tint_progress = Color(shield_colour, 0.502)
@@ -96,6 +97,7 @@ func _unpause():
 	get_tree().paused = false
 
 func _retry():
+	# Unpause to avoid getting stuck
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 
