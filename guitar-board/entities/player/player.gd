@@ -214,14 +214,15 @@ func do_slash():
 	if not is_slash_cooldown:
 		slash.attack()
 		is_slash_cooldown = true
+		slash_cooldown = 0
 
 
 func cooldown_slash(delta: float):
 	if is_slash_cooldown:
-		if slash_cooldown > 0:
-			slash_cooldown -= slash_cd_speed * delta
+		if slash_cooldown < max_slash_cooldown:
+			slash_cooldown += slash_cd_speed * delta
 		
-		if slash_cooldown <= 0:
+		if slash_cooldown >= max_slash_cooldown:
 			is_slash_cooldown = false
 			slash_cooldown = max_slash_cooldown
 
@@ -230,15 +231,16 @@ func dash():
 	if not is_dash_cooldown:
 		is_dashing = true
 		is_dash_cooldown = true
+		dash_cooldown = 0
 		get_tree().create_timer(0.5).timeout.connect(func(): is_dashing = false)
 
 
 func cooldown_dash(delta: float):
 	if is_dash_cooldown:
-		if dash_cooldown > 0:
-			dash_cooldown -= dash_cd_speed * delta
+		if dash_cooldown < max_dash_cooldown:
+			dash_cooldown += dash_cd_speed * delta
 		
-		if dash_cooldown <= 0:
+		if dash_cooldown >= max_dash_cooldown:
 			is_dash_cooldown = false
 			dash_cooldown = max_dash_cooldown
 
