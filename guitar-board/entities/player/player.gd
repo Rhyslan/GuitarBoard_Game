@@ -22,7 +22,7 @@ signal game_over_signal()
 @export var slash_cd_speed := 5.0
 @export_group("Dash")
 @export var max_dash_cooldown := 2.0
-@export var dash_cd_speed := 5.0
+@export var dash_cd_speed := 2.0
 @export var dash_speed_multiplier := 2.0
 @export_group("Shield")
 @export var max_shield_amount := 100
@@ -54,9 +54,9 @@ var is_shield_refilling := false
 @onready var attack_spawn: Marker2D = $AttackSpawn
 @onready var knockback_wave: KnockbackWave = $KnockbackWave
 @onready var shield: Shield = $Shield
-@onready var health := max_health
-@onready var slash_cooldown := max_slash_cooldown
-@onready var dash_cooldown := max_dash_cooldown
+@onready var health: float = max_health
+@onready var slash_cooldown: float = max_slash_cooldown
+@onready var dash_cooldown: float = max_dash_cooldown
 
 
 func _ready() -> void:
@@ -67,10 +67,13 @@ func _physics_process(delta: float) -> void:
 	ui.update_display(
 		round(health),
 		round(bullets_remaining), 
+		is_reloading,
 		beam_remaining, 
 		is_beam_refilling, 
-		round(slash_cooldown),
-		round(dash_cooldown),
+		slash_cooldown,
+		is_slash_cooldown,
+		dash_cooldown, 
+		is_dash_cooldown,
 		shield_remaining,
 		is_shield_refilling
 	)
@@ -79,6 +82,7 @@ func _physics_process(delta: float) -> void:
 	
 	reload(delta)
 	cooldown_slash(delta)
+	cooldown_dash(delta)
 	
 	#everything the player hits
 	for i in get_slide_collision_count():
@@ -225,6 +229,7 @@ func cooldown_slash(delta: float):
 func dash():
 	if not is_dash_cooldown:
 		is_dashing = true
+		is_dash_cooldown = true
 		get_tree().create_timer(0.5).timeout.connect(func(): is_dashing = false)
 
 

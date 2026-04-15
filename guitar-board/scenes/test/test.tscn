@@ -38,18 +38,6 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 script = ExtResource("3_st4qh")
 
-[node name="Label" type="Label" parent="UI Canvas/UI" unique_id=655064835]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 6.0
-offset_top = 7.0
-offset_right = -554.0
-offset_bottom = -393.0
-grow_horizontal = 2
-grow_vertical = 2
-
 [node name="ResourcesContainer" type="MarginContainer" parent="UI Canvas/UI" unique_id=591660455]
 layout_mode = 1
 anchors_preset = 2
@@ -62,13 +50,16 @@ theme_override_constants/margin_left = 30
 theme_override_constants/margin_top = 100
 theme_override_constants/margin_bottom = 30
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UI Canvas/UI/ResourcesContainer" unique_id=1508540955]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI Canvas/UI/ResourcesContainer" unique_id=908167877]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer" unique_id=1508540955]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
 theme_override_constants/separation = 10
 
-[node name="Gun" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=1202186752]
+[node name="Gun" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/HBoxContainer" unique_id=1202186752]
 layout_mode = 2
 size_flags_vertical = 0
 value = 20.0
@@ -79,9 +70,10 @@ texture_progress_offset = Vector2(2, 3)
 tint_under = Color(0, 1, 0, 1)
 tint_progress = Color(0, 1, 0, 1)
 
-[node name="Beam" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=91866239]
+[node name="Beam" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/HBoxContainer" unique_id=91866239]
 layout_mode = 2
 size_flags_vertical = 0
+step = 0.001
 value = 20.0
 fill_mode = 3
 texture_under = ExtResource("4_2ns80")
@@ -90,9 +82,10 @@ texture_progress_offset = Vector2(2, 3)
 tint_under = Color(1, 0, 0, 1)
 tint_progress = Color(1, 0, 0, 1)
 
-[node name="Slash" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=1070978000]
+[node name="Slash" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/HBoxContainer" unique_id=1070978000]
 layout_mode = 2
 size_flags_vertical = 0
+step = 0.001
 value = 20.0
 fill_mode = 3
 texture_under = ExtResource("4_2ns80")
@@ -101,9 +94,10 @@ texture_progress_offset = Vector2(2, 3)
 tint_under = Color(1, 1, 0, 1)
 tint_progress = Color(1, 1, 0, 1)
 
-[node name="Dash" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=712579904]
+[node name="Dash" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/HBoxContainer" unique_id=712579904]
 layout_mode = 2
 size_flags_vertical = 0
+step = 0.001
 value = 20.0
 fill_mode = 3
 texture_under = ExtResource("4_2ns80")
@@ -112,9 +106,10 @@ texture_progress_offset = Vector2(2, 3)
 tint_under = Color(0, 0, 1, 1)
 tint_progress = Color(0, 0, 1, 1)
 
-[node name="Shield" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=53383547]
+[node name="Shield" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/HBoxContainer" unique_id=53383547]
 layout_mode = 2
 size_flags_vertical = 0
+step = 0.001
 value = 20.0
 fill_mode = 3
 texture_under = ExtResource("4_2ns80")
@@ -122,6 +117,42 @@ texture_progress = ExtResource("5_5unt0")
 texture_progress_offset = Vector2(2, 3)
 tint_under = Color(1, 0.53333336, 0, 1)
 tint_progress = Color(1, 0.53333336, 0, 1)
+
+[node name="Labels" type="HBoxContainer" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer" unique_id=181119389]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+
+[node name="GunLabel" type="Label" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/Labels" unique_id=438289131]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+text = "Gun"
+horizontal_alignment = 1
+
+[node name="BeamLabel" type="Label" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/Labels" unique_id=2024695112]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+text = "Beam"
+horizontal_alignment = 1
+
+[node name="SlashLabel" type="Label" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/Labels" unique_id=1923447130]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+text = "Slash"
+horizontal_alignment = 1
+
+[node name="DashLabel" type="Label" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/Labels" unique_id=1799384449]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+text = "Dash"
+horizontal_alignment = 1
+
+[node name="ShieldLabel" type="Label" parent="UI Canvas/UI/ResourcesContainer/VBoxContainer/Labels" unique_id=1234595197]
+custom_minimum_size = Vector2(46, 0)
+layout_mode = 2
+text = "Shield"
+horizontal_alignment = 1
 
 [node name="HealthContainer" type="MarginContainer" parent="UI Canvas/UI" unique_id=1409382889]
 layout_mode = 1

@@ -4,12 +4,15 @@ var score := 0
 
 # Resource variables
 @onready var health_bar: TextureProgressBar = $HealthContainer/HealthBar
-@onready var gun_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Gun
-@onready var beam_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Beam
+@onready var gun_bar: TextureProgressBar = $ResourcesContainer/VBoxContainer/HBoxContainer/Gun
+@onready var gun_colour: Color = gun_bar.tint_progress
+@onready var beam_bar: TextureProgressBar = $ResourcesContainer/VBoxContainer/HBoxContainer/Beam
 @onready var beam_colour: Color = beam_bar.tint_progress
-@onready var slash_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Slash
-@onready var dash_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Dash
-@onready var shield_bar: TextureProgressBar = $ResourcesContainer/HBoxContainer/Shield
+@onready var slash_bar: TextureProgressBar = $ResourcesContainer/VBoxContainer/HBoxContainer/Slash
+@onready var slash_colour: Color = slash_bar.tint_progress
+@onready var dash_bar: TextureProgressBar = $ResourcesContainer/VBoxContainer/HBoxContainer/Dash
+@onready var dash_colour: Color = dash_bar.tint_progress
+@onready var shield_bar: TextureProgressBar = $ResourcesContainer/VBoxContainer/HBoxContainer/Shield
 @onready var shield_colour: Color = shield_bar.tint_progress
 
 # Round and Score variables
@@ -54,22 +57,43 @@ func set_max_values(health: float, bullets:float, beam: float, slash: float, das
 func update_display(
 	health: float, 
 	bullet_count: int, 
-	beam_value: float, 
+	reloading: bool,
+	beam_val: float, 
 	beam_full_refil: bool, 
-	slash_val: int, 
-	dash_val: int, 
-	shield_value: float,
+	slash_val: float, 
+	slash_refilling: bool,
+	dash_val: float, 
+	dash_refilling: bool,
+	shield_val: float,
 	shield_full_refil: bool
 ):
 	health_bar.value = health
+	
 	gun_bar.value = bullet_count
-	beam_bar.value = beam_value
+	if reloading:
+		gun_bar.tint_progress = Color(gun_colour, 0.502)
+	else:
+		gun_bar.tint_progress = gun_colour
+	
+	beam_bar.value = beam_val
 	if beam_full_refil:
 		beam_bar.tint_progress = Color(beam_colour, 0.502)
 	else:
 		beam_bar.tint_progress = beam_colour
+	
 	slash_bar.value = slash_val
-	shield_bar.value = shield_value
+	if slash_refilling:
+		slash_bar.tint_progress = Color(slash_colour, 0.502)
+	else:
+		slash_bar.tint_progress = slash_colour
+	
+	dash_bar.value = dash_val
+	if dash_refilling:
+		dash_bar.tint_progress = Color(dash_colour, 0.502)
+	else:
+		dash_bar.tint_progress = dash_colour
+	
+	shield_bar.value = shield_val
 	if shield_full_refil:
 		shield_bar.tint_progress = Color(shield_colour, 0.502)
 	else:
