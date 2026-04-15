@@ -4,56 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://bg6bi64miavng" path="res://entities/player/player.tscn" id="2_st4qh"]
 [ext_resource type="Texture2D" uid="uid://csf0vja8c25c7" path="res://assets/map/Tile1.png" id="3_k6n02"]
 [ext_resource type="Script" uid="uid://bhyhscjyq2jpa" path="res://scenes/test/ui.gd" id="3_st4qh"]
+[ext_resource type="Texture2D" uid="uid://duq32ecg4a3i3" path="res://assets/ui/BarBack.png" id="4_2ns80"]
 [ext_resource type="Script" uid="uid://cmh6c1tpt43tt" path="res://scenes/test/spawn_timer.gd" id="4_51e2l"]
+[ext_resource type="Texture2D" uid="uid://bd7ld45njgsgq" path="res://assets/ui/BarProgress.png" id="5_5unt0"]
 [ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="5_oj4i3"]
-
-[sub_resource type="Gradient" id="Gradient_51e2l"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_oj4i3"]
-gradient = SubResource("Gradient_51e2l")
-width = 200
-height = 30
-
-[sub_resource type="Gradient" id="Gradient_st4qh"]
-colors = PackedColorArray(1, 1, 1, 0.19607843, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1suh2"]
-gradient = SubResource("Gradient_st4qh")
-width = 200
-height = 30
-
-[sub_resource type="Gradient" id="Gradient_2ns80"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5unt0"]
-gradient = SubResource("Gradient_2ns80")
-width = 200
-height = 30
-
-[sub_resource type="Gradient" id="Gradient_saoeg"]
-colors = PackedColorArray(1, 1, 1, 0.19607843, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_we7ej"]
-gradient = SubResource("Gradient_saoeg")
-width = 200
-height = 30
-
-[sub_resource type="Gradient" id="Gradient_xi5sv"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2dgve"]
-gradient = SubResource("Gradient_xi5sv")
-width = 400
-height = 40
-
-[sub_resource type="Gradient" id="Gradient_x4ubh"]
-colors = PackedColorArray(1, 1, 1, 0.19607843, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xm0ii"]
-gradient = SubResource("Gradient_x4ubh")
-width = 400
-height = 40
+[ext_resource type="Texture2D" uid="uid://c041sbtryml1a" path="res://assets/ui/HealthBack.png" id="6_saoeg"]
+[ext_resource type="Texture2D" uid="uid://dyl6nv8lyq2i4" path="res://assets/ui/HealthProgress.png" id="7_we7ej"]
 
 [sub_resource type="Curve2D" id="Curve2D_st4qh"]
 _data = {
@@ -94,7 +50,7 @@ offset_bottom = -393.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Resources" type="MarginContainer" parent="UI Canvas/UI" unique_id=591660455]
+[node name="ResourcesContainer" type="MarginContainer" parent="UI Canvas/UI" unique_id=591660455]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -103,85 +59,122 @@ offset_top = -200.0
 offset_right = 430.0
 grow_vertical = 0
 theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 100
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI Canvas/UI/Resources" unique_id=317080268]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI Canvas/UI/ResourcesContainer" unique_id=1508540955]
 layout_mode = 2
-alignment = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 10
 
-[node name="HBoxGunSlash" type="HBoxContainer" parent="UI Canvas/UI/Resources/VBoxContainer" unique_id=1816232432]
+[node name="Gun" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=1202186752]
 layout_mode = 2
-
-[node name="Ammo" type="Label" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxGunSlash" unique_id=1057865712]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Ammo: "
-
-[node name="SlashCD" type="Label" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxGunSlash" unique_id=37117989]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 20
-text = "Slash: "
-
-[node name="HBoxBeamShield" type="HBoxContainer" parent="UI Canvas/UI/Resources/VBoxContainer" unique_id=1722619213]
-layout_mode = 2
-
-[node name="BeamBar" type="TextureProgressBar" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxBeamShield" unique_id=331659241]
-layout_mode = 2
-value = 100.0
-texture_under = SubResource("GradientTexture2D_oj4i3")
-texture_progress = SubResource("GradientTexture2D_1suh2")
-tint_under = Color(0.30106175, 0.0077020964, 0.010997816, 1)
-tint_progress = Color(1, 0, 0, 1)
-
-[node name="ShieldBar" type="TextureProgressBar" parent="UI Canvas/UI/Resources/VBoxContainer/HBoxBeamShield" unique_id=905245998]
-layout_mode = 2
-value = 100.0
-texture_under = SubResource("GradientTexture2D_5unt0")
-texture_progress = SubResource("GradientTexture2D_we7ej")
-tint_under = Color(0.39255267, 0.16630164, 0, 1)
-tint_progress = Color(1, 0.46666667, 0, 1)
-
-[node name="HealthBar" type="TextureProgressBar" parent="UI Canvas/UI/Resources/VBoxContainer" unique_id=1049492044]
-layout_mode = 2
-size_flags_vertical = 8
-value = 100.0
-texture_under = SubResource("GradientTexture2D_2dgve")
-texture_progress = SubResource("GradientTexture2D_xm0ii")
-tint_under = Color(0.13333334, 0.18431373, 0.13333334, 1)
+size_flags_vertical = 0
+value = 20.0
+fill_mode = 3
+texture_under = ExtResource("4_2ns80")
+texture_progress = ExtResource("5_5unt0")
+texture_progress_offset = Vector2(2, 3)
+tint_under = Color(0, 1, 0, 1)
 tint_progress = Color(0, 1, 0, 1)
 
-[node name="RoundScore" type="MarginContainer" parent="UI Canvas/UI" unique_id=1057937348]
+[node name="Beam" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=91866239]
+layout_mode = 2
+size_flags_vertical = 0
+value = 20.0
+fill_mode = 3
+texture_under = ExtResource("4_2ns80")
+texture_progress = ExtResource("5_5unt0")
+texture_progress_offset = Vector2(2, 3)
+tint_under = Color(1, 0, 0, 1)
+tint_progress = Color(1, 0, 0, 1)
+
+[node name="Slash" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=1070978000]
+layout_mode = 2
+size_flags_vertical = 0
+value = 20.0
+fill_mode = 3
+texture_under = ExtResource("4_2ns80")
+texture_progress = ExtResource("5_5unt0")
+texture_progress_offset = Vector2(2, 3)
+tint_under = Color(1, 1, 0, 1)
+tint_progress = Color(1, 1, 0, 1)
+
+[node name="Dash" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=712579904]
+layout_mode = 2
+size_flags_vertical = 0
+value = 20.0
+fill_mode = 3
+texture_under = ExtResource("4_2ns80")
+texture_progress = ExtResource("5_5unt0")
+texture_progress_offset = Vector2(2, 3)
+tint_under = Color(0, 0, 1, 1)
+tint_progress = Color(0, 0, 1, 1)
+
+[node name="Shield" type="TextureProgressBar" parent="UI Canvas/UI/ResourcesContainer/HBoxContainer" unique_id=53383547]
+layout_mode = 2
+size_flags_vertical = 0
+value = 20.0
+fill_mode = 3
+texture_under = ExtResource("4_2ns80")
+texture_progress = ExtResource("5_5unt0")
+texture_progress_offset = Vector2(2, 3)
+tint_under = Color(1, 0.53333336, 0, 1)
+tint_progress = Color(1, 0.53333336, 0, 1)
+
+[node name="HealthContainer" type="MarginContainer" parent="UI Canvas/UI" unique_id=1409382889]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -400.0
-offset_top = -200.0
+offset_left = -80.0
+offset_top = -230.0
 grow_horizontal = 0
 grow_vertical = 0
 theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI Canvas/UI/RoundScore" unique_id=386210555]
-layout_direction = 3
+[node name="HealthBar" type="TextureProgressBar" parent="UI Canvas/UI/HealthContainer" unique_id=1603444550]
 layout_mode = 2
-alignment = 2
+value = 50.0
+fill_mode = 3
+texture_under = ExtResource("6_saoeg")
+texture_progress = ExtResource("7_we7ej")
 
-[node name="Round" type="Label" parent="UI Canvas/UI/RoundScore/VBoxContainer" unique_id=195826847]
+[node name="RoundScoreContainer" type="MarginContainer" parent="UI Canvas/UI" unique_id=901197799]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -571.0
+offset_right = 575.0
+offset_bottom = 65.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI Canvas/UI/RoundScoreContainer" unique_id=211586394]
 layout_mode = 2
-theme_override_font_sizes/font_size = 30
+theme_override_constants/separation = 800
+alignment = 1
+
+[node name="Round" type="Label" parent="UI Canvas/UI/RoundScoreContainer/HBoxContainer" unique_id=286246508]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "Round: "
 
-[node name="Score" type="Label" parent="UI Canvas/UI/RoundScore/VBoxContainer" unique_id=1118834756]
+[node name="Score" type="Label" parent="UI Canvas/UI/RoundScoreContainer/HBoxContainer" unique_id=1166106266]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Score: "
 
 [node name="PauseMenu" type="CenterContainer" parent="UI Canvas/UI" unique_id=1850675293]
 process_mode = 2
+visible = false
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 1
 anchors_preset = -1
@@ -217,6 +210,7 @@ text = "Return to title"
 
 [node name="GameOverMenu" type="CenterContainer" parent="UI Canvas/UI" unique_id=610152947]
 process_mode = 2
+visible = false
 custom_minimum_size = Vector2(500, 200)
 layout_mode = 1
 anchors_preset = -1
