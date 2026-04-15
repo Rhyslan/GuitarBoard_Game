@@ -1,5 +1,7 @@
 class_name GameUI extends Control
 
+var score := 0
+
 # Resource variables
 @onready var health_bar: TextureProgressBar = $Resources/VBoxContainer/HealthBar
 @onready var ammo_count: Label = $Resources/VBoxContainer/HBoxGunSlash/Ammo
@@ -26,6 +28,7 @@ class_name GameUI extends Control
 
 func _ready():
 	round_tracker.text = "Round: 1"
+	score_tracker.text = "Score: 0"
 	
 	# Pause menu
 	unpause_button.pressed.connect(_unpause)
@@ -36,11 +39,6 @@ func _ready():
 	retry_button.pressed.connect(_retry)
 	go_title_button.pressed.connect(_go_title)
 	game_over_menu.hide()
-
-
-# TODO: Change UI values to match game values, i.e. health_bar.value = Player Health
-#func _process(delta):
-#	pass
 
 
 func set_max_values(health: float, bullets:float, beam: float, slash: float, dash:float, shield: float):
@@ -57,8 +55,8 @@ func update_display(
 	bullet_count: int, 
 	beam_value: float, 
 	beam_full_refil: bool, 
-	slash_val: float, 
-	dash_val: float, 
+	slash_val: int, 
+	dash_val: int, 
 	shield_value: float,
 	shield_full_refil: bool
 ):
@@ -75,6 +73,10 @@ func update_display(
 		shield_bar.tint_progress = Color(shield_colour, 0.502)
 	else:
 		shield_bar.tint_progress = shield_colour
+
+
+func update_score(new_score: int):
+	score_tracker.text = "Score: %s" % str(score + new_score)
 
 
 func _on_test_round_change(new_round: int):
