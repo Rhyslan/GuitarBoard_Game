@@ -57,6 +57,7 @@ var is_shield_refilling := false
 @onready var health: float = max_health
 @onready var slash_cooldown: float = max_slash_cooldown
 @onready var dash_cooldown: float = max_dash_cooldown
+@onready var dash_effect: Sprite2D = $DashEffect
 
 
 func _ready() -> void:
@@ -83,6 +84,9 @@ func _physics_process(delta: float) -> void:
 	reload(delta)
 	cooldown_slash(delta)
 	cooldown_dash(delta)
+	
+	dash_effect.visible = is_dashing
+	dash_effect.rotation = Input.get_vector("Left", "Right", "Up", "Down").angle() + deg_to_rad(90)
 	
 	#everything the player hits
 	for i in get_slide_collision_count():

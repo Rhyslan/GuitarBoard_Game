@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bg6bi64miavng"]
 
 [ext_resource type="Script" uid="uid://bnueex7p0hhet" path="res://entities/player/player.gd" id="1_abrql"]
+[ext_resource type="Texture2D" uid="uid://dxmy7vn1rvbrf" path="res://assets/player/dash.png" id="2_qiwj3"]
 [ext_resource type="Texture2D" uid="uid://c4112t0f88k5s" path="res://assets/player/Player.png" id="3_fkugw"]
 [ext_resource type="PackedScene" uid="uid://46e1880n55v4" path="res://entities/player/slash.tscn" id="4_fkugw"]
 [ext_resource type="PackedScene" uid="uid://dpydk6uympif0" path="res://entities/player/beam.tscn" id="5_8fjmc"]
@@ -12,6 +13,12 @@ radius = 74.168724
 
 [node name="Player" type="CharacterBody2D" unique_id=2057214509]
 script = ExtResource("1_abrql")
+
+[node name="DashEffect" type="Sprite2D" parent="." unique_id=1069321593]
+position = Vector2(-1.6940659e-21, 5.9604645e-08)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("2_qiwj3")
+offset = Vector2(-21.212122, 399.99997)
 
 [node name="KnockbackWave" parent="." unique_id=1618058073 instance=ExtResource("5_fkugw")]
 visible = false
