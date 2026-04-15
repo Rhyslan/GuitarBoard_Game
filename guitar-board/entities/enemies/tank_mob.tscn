@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bp20vplt8coop"]
+
+[ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="1_5vijf"]
+[ext_resource type="Script" uid="uid://br3psfrbmrc12" path="res://tank_mob.gd" id="2_aryvl"]
+
+[node name="TankMob" unique_id=409378065 instance=ExtResource("1_5vijf")]
+scale = Vector2(3.8619037, 3.9617565)
+script = ExtResource("2_aryvl")
+idle_time = 3.0
+windup_time = 0.8
+charge_duration = 1.2
+charge_speed = 500.0
+health = 20.0
+dmg_per_sec = 8.0
+point_value = 5
+speed = 0.0

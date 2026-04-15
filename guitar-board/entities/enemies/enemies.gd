@@ -5,6 +5,7 @@ class_name Mob extends CharacterBody2D
 @export var health := 2.0
 @export var dmg_per_sec := 1.0
 @export var point_value := 1
+@export var speed := 200.0
 
 var knockback_vel := Vector2.ZERO
 
@@ -14,17 +15,24 @@ var knockback_vel := Vector2.ZERO
 
 
 #follows player position
-func _physics_process(_delta: float):
+func _physics_process(delta: float):
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * 300.0
-	velocity += knockback_vel
+	var distance_to_player = global_position.distance_to(player.global_position)
+	look_at(player.global_position)
+	if distance_to_player > 85:
+		velocity = direction * speed
+	else:
+		velocity = Vector2.ZERO
 	
+	velocity += knockback_vel
 	move_and_slide()
 	
 	#enemy collision
-	#for i in get_slide_collision_count():
-	#	var collision = get_slide_collision(i)
-	#	var collider = collision.get_collider()
+	##for i in get_slide_collision_count():
+		##var collision = get_slide_collision(i)
+		##var collider = collision.get_collider()
+		##if collider is Player:
+			##collider.get_hit(dmg_per_sec * delta)
 
 
 # Deletes mob when hp = 0

@@ -12,6 +12,8 @@
 radius = 74.168724
 
 [node name="Player" type="CharacterBody2D" unique_id=2057214509]
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_abrql")
 
 [node name="DashEffect" type="Sprite2D" parent="." unique_id=1069321593]
