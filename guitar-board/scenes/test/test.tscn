@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://ch6mhsl4nbe4e" path="res://scenes/test/test.gd" id="1_da6vm"]
 [ext_resource type="PackedScene" uid="uid://bg6bi64miavng" path="res://entities/player/player.tscn" id="2_st4qh"]
 [ext_resource type="PackedScene" uid="uid://cssvipewgnaki" path="res://entities/enemies/ranged_mob.tscn" id="2_we7ej"]
-[ext_resource type="Texture2D" uid="uid://csf0vja8c25c7" path="res://assets/map/Tile1.png" id="3_k6n02"]
 [ext_resource type="Script" uid="uid://bhyhscjyq2jpa" path="res://scenes/test/ui.gd" id="3_st4qh"]
 [ext_resource type="Texture2D" uid="uid://duq32ecg4a3i3" path="res://assets/ui/BarBack.png" id="4_2ns80"]
 [ext_resource type="Script" uid="uid://cmh6c1tpt43tt" path="res://scenes/test/spawn_timer.gd" id="4_51e2l"]
@@ -11,7 +10,27 @@
 [ext_resource type="PackedScene" uid="uid://b0j21hee1km24" path="res://entities/enemies/mob.tscn" id="5_oj4i3"]
 [ext_resource type="Texture2D" uid="uid://c041sbtryml1a" path="res://assets/ui/HealthBack.png" id="6_saoeg"]
 [ext_resource type="Texture2D" uid="uid://dyl6nv8lyq2i4" path="res://assets/ui/HealthProgress.png" id="7_we7ej"]
+[ext_resource type="Texture2D" uid="uid://r2empyfvymho" path="res://assets/map/mapwithborder.png" id="9_xi5sv"]
 [ext_resource type="PackedScene" uid="uid://bp20vplt8coop" path="res://entities/enemies/tank_mob.tscn" id="13_2dgve"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2dgve"]
+a = Vector2(-1454, -1919)
+b = Vector2(-1473, 5887)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_x4ubh"]
+a = Vector2(6292, -1813)
+b = Vector2(-1665, -1839)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_xm0ii"]
+a = Vector2(5937, -1915)
+b = Vector2(5962, 5881)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_bg4ew"]
+a = Vector2(6178, 5666)
+b = Vector2(-1589, 5590)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xi5sv"]
+size = Vector2(603.629, 615.6598)
 
 [sub_resource type="Curve2D" id="Curve2D_st4qh"]
 _data = {
@@ -23,11 +42,6 @@ point_count = 11
 script = ExtResource("1_da6vm")
 RangedMob = ExtResource("2_we7ej")
 TankMob = ExtResource("13_2dgve")
-
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=539078965]
-position = Vector2(2289.5, 1898.5)
-scale = Vector2(2.9079168, 2.5820832)
-texture = ExtResource("3_k6n02")
 
 [node name="UI Canvas" type="CanvasLayer" parent="." unique_id=290768885]
 
@@ -281,8 +295,94 @@ text = "Retry"
 layout_mode = 2
 text = "Return to title"
 
-[node name="BG Canvas" type="CanvasLayer" parent="." unique_id=976736944]
-layer = -30
+[node name="BG Canvas" type="StaticBody2D" parent="." unique_id=460184676]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BG Canvas" unique_id=947804587]
+shape = SubResource("SegmentShape2D_2dgve")
+
+[node name="Sprite2D" type="Sprite2D" parent="BG Canvas" unique_id=539078965]
+position = Vector2(2289.5, 1898.5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("9_xi5sv")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="BG Canvas" unique_id=336787356]
+shape = SubResource("SegmentShape2D_x4ubh")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="BG Canvas" unique_id=1435465114]
+shape = SubResource("SegmentShape2D_xm0ii")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="BG Canvas" unique_id=2063666288]
+shape = SubResource("SegmentShape2D_bg4ew")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="BG Canvas" unique_id=1888560237]
+position = Vector2(198.5, -180.99998)
+rotation = -0.7534932
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="BG Canvas" unique_id=1188417290]
+position = Vector2(-624.00006, 367.00003)
+rotation = -0.4345714
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="BG Canvas" unique_id=498164711]
+position = Vector2(1792.9999, -122)
+rotation = -1.4269414
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="BG Canvas" unique_id=270202240]
+position = Vector2(2738, -626)
+rotation = -1.5787742
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="BG Canvas" unique_id=333154742]
+position = Vector2(3565, -910)
+rotation = -1.5787742
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="BG Canvas" unique_id=630034030]
+position = Vector2(2318, 752.99994)
+rotation = -1.4705722
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="BG Canvas" unique_id=1598260581]
+position = Vector2(3316, 586.00006)
+rotation = -0.564342
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="BG Canvas" unique_id=1079803187]
+position = Vector2(4006, 189.99994)
+rotation = -0.564342
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="BG Canvas" unique_id=357822645]
+position = Vector2(409.99997, 1619)
+rotation = -0.3690156
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="BG Canvas" unique_id=1927762401]
+position = Vector2(1395, 1990.0002)
+rotation = -0.28658104
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="BG Canvas" unique_id=1472607165]
+position = Vector2(-251.99997, 2302)
+rotation = -1.1511927
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="BG Canvas" unique_id=2039407803]
+position = Vector2(-290, 3367)
+rotation = -1.9107473
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="BG Canvas" unique_id=997460192]
+position = Vector2(2601, 4933)
+rotation = -1.9107473
+shape = SubResource("RectangleShape2D_xi5sv")
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="BG Canvas" unique_id=802063205]
+position = Vector2(3527, 4201.0005)
+rotation = -2.522541
+shape = SubResource("RectangleShape2D_xi5sv")
 
 [node name="Player" parent="." unique_id=2057214509 node_paths=PackedStringArray("ui") instance=ExtResource("2_st4qh")]
 position = Vector2(1482, 901)

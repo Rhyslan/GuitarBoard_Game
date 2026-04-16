@@ -35,6 +35,10 @@ shape = SubResource("CircleShape2D_fkugw")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1237259525]
 zoom = Vector2(0.5, 0.5)
+limit_left = -1460
+limit_top = -1850
+limit_right = 6040
+limit_bottom = 5650
 
 [node name="AttackSpawn" type="Marker2D" parent="." unique_id=896916255]
 position = Vector2(0, -49)
