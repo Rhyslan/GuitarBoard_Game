@@ -8,7 +8,7 @@ A game created for the Swinburne University of Technology unit GAM30006 - Experi
 This game was developed by a team of 5 students in a period of 2 weeks.
 
 ## Getting Started
-### Dependencies
+### Requirements
 #### Hardware
 - Windows 10/11 computer
 - Wii guitar & Wii remote
