@@ -34,19 +34,19 @@ This game was developed by a team of 5 students in a period of 2 weeks.
 The goal of the game is to kill as many enemies as possible. The Wii balance board is used for movement and the guitar is used to select and perform attacks and other actions. Actions need to be selected with one of the fret buttons on the guitar and then the selected action(s) are performed when the strum bar is pressed.
 
 ### Controls
-| Action                 | Keyboard                        | Controller                   |
-| ---------------------- | :-----------------------------: | :--------------------------: |
-| Move Up                | ``W``                           | Balance Board Lean Forward   |
-| Move Down              | ``S``                           | Balance Board Lean Backward  |
-| Move Left              | ``A``                           | Balance Board Lean Left      |
-| Move Right             | ``D``                           | Balance Board Lean Right     |
-| Jump                   | ``Space``                       | Balance Board Jump/Lift Feet |
-| Select Gun             | ``1``                           | ``Green``                    |
-| Select Beam            | ``2``                           | ``Red``                      |
-| Select Slash           | ``3``                           | ``Yellow``                   |
-| Select Dash            | ``4``                           | ``Blue``                     |
-| Select Shield          | ``5``                           | ``Orange``                   |
-| Do selected action     | ``Left Arrow``, ``Right Arrow`` | ``Strum Up``, ``Strum Down`` |
-| Reload                 | ``Left Shift``                  | ``Star Power``               |
-| Spin Counter-Clockwise | ``Q``                           | ``Whammy Bar Fully Down``    |
-| Spin Clockwise         | ``E``                           | ``Whammy Bar Fully Up``      |
+| Action                 | Keyboard                    | Controller                   |
+| ---------------------- | :-------------------------: | :--------------------------: |
+| Move Up                | `W`                         | Balance Board Lean Forward   |
+| Move Down              | `S`                         | Balance Board Lean Backward  |
+| Move Left              | `A`                         | Balance Board Lean Left      |
+| Move Right             | `D`                         | Balance Board Lean Right     |
+| Jump                   | `Space`                     | Balance Board Jump/Lift Feet |
+| Select Gun             | `1`                         | `Green`                      |
+| Select Beam            | `2`                         | `Red`                        |
+| Select Slash           | `3`                         | `Yellow`                     |
+| Select Dash            | `4`                         | `Blue`                       |
+| Select Shield          | `5`                         | `Orange`                     |
+| Do selected action     | `Left Arrow`, `Right Arrow` | `Strum Up`, `Strum Down`     |
+| Reload                 | `Left Shift`                | `Star Power`                 |
+| Spin Counter-Clockwise | `Q`                         | `Whammy Bar Fully Down`      |
+| Spin Clockwise         | `E`                         | `Whammy Bar Fully Up`        |
